@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Second Brain</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1c1b23",
+                    "tertiary": "#743300",
+                    "on-tertiary-fixed-variant": "#763300",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#321200",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#474554",
+                    "inverse-primary": "#c6bfff",
+                    "tertiary-fixed-dim": "#ffb68d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface": "#fcf8ff",
+                    "on-primary-fixed": "#150066",
+                    "surface-container": "#f0ecf8",
+                    "surface-container-highest": "#e5e0ed",
+                    "secondary-fixed-dim": "#bcc5e9",
+                    "primary-fixed-dim": "#c6bfff",
+                    "error-container": "#ffdad6",
+                    "secondary": "#545e7c",
+                    "on-primary-container": "#d7d2ff",
+                    "surface-tint": "#5746d5",
+                    "secondary-container": "#cfd9fd",
+                    "on-secondary-container": "#545e7d",
+                    "primary-container": "#5645d4",
+                    "tertiary-fixed": "#ffdbc9",
+                    "inverse-on-surface": "#f3effb",
+                    "surface-container-high": "#ebe6f2",
+                    "outline": "#787586",
+                    "background": "#fcf8ff",
+                    "on-surface": "#1c1b23",
+                    "inverse-surface": "#312f38",
+                    "primary": "#3d27bc",
+                    "surface-bright": "#fcf8ff",
+                    "secondary-fixed": "#dae2ff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#ffcdb1",
+                    "on-primary-fixed-variant": "#3e28bd",
+                    "surface-dim": "#dcd8e4",
+                    "surface-variant": "#e5e0ed",
+                    "on-secondary-fixed": "#101a36",
+                    "tertiary-container": "#994500",
+                    "outline-variant": "#c8c4d7",
+                    "surface-container-low": "#f6f2fe",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#e4dfff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "hero": "120px",
+                    "md": "16px",
+                    "lg": "20px",
+                    "section": "64px",
+                    "xl": "24px",
+                    "sm": "12px",
+                    "xxl": "32px"
+            },
+            "fontFamily": {
+                    "hero": ["Inter"],
+                    "h1": ["Inter"],
+                    "button": ["Inter"],
+                    "h2": ["Inter"],
+                    "h3": ["Inter"],
+                    "body": ["Inter"]
+            },
+            "fontSize": {
+                    "hero": ["80px", {"lineHeight": "1.1", "letterSpacing": "-2px", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "600"}],
+                    "button": ["14px", {"lineHeight": "1", "letterSpacing": "0px", "fontWeight": "500"}],
+                    "h2": ["36px", {"lineHeight": "1.3", "letterSpacing": "-0.5px", "fontWeight": "600"}],
+                    "h3": ["28px", {"lineHeight": "1.4", "letterSpacing": "0px", "fontWeight": "600"}],
+                    "body": ["16px", {"lineHeight": "1.6", "letterSpacing": "0px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body text-body antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-[240px] z-40 border-r border-slate-200 dark:border-slate-800 bg-[#fafaf9] dark:bg-slate-900 flex flex-col gap-1 py-8">
+<div class="px-6 mb-6">
+<h2 class="text-lg font-semibold text-slate-800 dark:text-slate-100 font-['Inter']">Second Brain</h2>
+<p class="font-['Inter'] text-sm text-slate-500">Knowledge Synthesizer</p>
+</div>
+<div class="flex flex-col gap-1 w-full font-['Inter'] text-sm">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">home</span>
+                Home
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">psychology</span>
+                Brain Map
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">database</span>
+                Sources
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+                Synthesis
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-4 py-2 bg-white dark:bg-slate-800 border-l-[3px] border-[#5645d4] text-[#5645d4] font-semibold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-[240px] flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold text-slate-900 dark:text-slate-50 font-['Inter'] tracking-tight">Second Brain</h1>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-['Inter'] text-sm font-medium tracking-tight hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 font-['Inter'] text-sm font-medium tracking-tight hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150" href="#">Workspace</a>
+<a class="text-slate-500 dark:text-slate-400 font-['Inter'] text-sm font-medium tracking-tight hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 text-[#5645d4] dark:text-[#7c6df2]">
+<button class="hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Settings Content Area -->
+<main class="flex-1 max-w-7xl mx-auto w-full px-xxl py-xl flex gap-xxl">
+<!-- Settings Sub-Nav -->
+<aside class="w-64 flex-shrink-0">
+<h2 class="font-h3 text-h3 text-on-background mb-lg">Settings</h2>
+<nav class="flex flex-col gap-xs font-button text-button">
+<a class="flex items-center gap-sm px-sm py-xs rounded-xl bg-surface-container text-primary font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">person</span>
+                        Profile
+                    </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-xl text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">memory</span>
+                        AI Preferences
+                    </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-xl text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">extension</span>
+                        Integrations
+                    </a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-xl text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">credit_card</span>
+                        Billing
+                    </a>
+</nav>
+</aside>
+<!-- Settings Sections -->
+<div class="flex-1 flex flex-col gap-section pb-section">
+<!-- Profile Section -->
+<section class="flex flex-col gap-lg">
+<div class="border-b border-outline-variant pb-sm">
+<h3 class="font-h3 text-h3 text-on-background">Profile</h3>
+<p class="font-body text-body text-on-surface-variant text-sm mt-1">Manage your personal information and workspace role.</p>
+</div>
+<div class="bg-surface border border-outline-variant rounded-full p-xl flex flex-col gap-xl">
+<!-- Avatar -->
+<div class="flex items-center gap-lg">
+<img class="w-20 h-20 rounded-full object-cover border border-outline-variant" data-alt="A highly detailed portrait photograph of a professional woman looking directly at the camera with a calm, focused expression. The lighting is soft, high-key, and minimalist, complementing a modern light-mode corporate aesthetic. The background is pure bright white, allowing the subject's subtle features and structured attire to stand out prominently. The mood is confident, serene, and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcCj2mv7QAbJRtAIxvQTxyRfVUbBULT4fQQldM1Y7NVkmk8AcXJx-4LNHGXj86YvkjHF1ev1df_Jo4kdkQ9rOxYQ9_CbhKWoLqhdPbBMkZHFprqe1qEmRAunb0PPFMN6OsJEZeaaF6PW5bYCO5PnaSkpxCKWlGdrpU0cTroqdZH9ToBWDkrtwLpwyikk-5ov98-lcz5XH5sT3gu6lA3sLqqNwCNuzpyp5dtVP7W4_V1xIgZmymHFTJljLbSWQPDmeRIRIfuwGIPUEN"/>
+<div class="flex flex-col gap-sm">
+<button class="bg-surface-container-high border border-outline-variant text-on-background font-button text-button px-md py-xs rounded-xl hover:bg-surface-container-highest transition-colors">
+                                    Change Avatar
+                                </button>
+<span class="text-xs text-on-surface-variant font-body">JPG, GIF or PNG. Max size of 800K</span>
+</div>
+</div>
+<!-- Form Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-button text-button text-on-background text-sm">Full Name</label>
+<input class="bg-surface-container-lowest border border-outline-variant rounded-xl px-md py-sm font-body text-body text-on-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="text" value="Eleanor Shellstrop"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-button text-button text-on-background text-sm">Email Address</label>
+<input class="bg-surface-container-lowest border border-outline-variant rounded-xl px-md py-sm font-body text-body text-on-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="email" value="eleanor@goodplace.org"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-button text-button text-on-background text-sm">Organization</label>
+<input class="bg-surface-container-lowest border border-outline-variant rounded-xl px-md py-sm font-body text-body text-on-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="text" value="The Good Place NGO"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-button text-button text-on-background text-sm">Role</label>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-xl px-md py-sm font-body text-body text-on-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none">
+<option>Administrator</option>
+<option>Researcher</option>
+<option>Analyst</option>
+</select>
+</div>
+</div>
+<div class="flex justify-end pt-sm border-t border-outline-variant mt-sm">
+<button class="bg-primary text-on-primary font-button text-button px-lg py-sm rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-colors">
+                                Save Changes
+                            </button>
+</div>
+</div>
+</section>
+<!-- AI Preferences Section -->
+<section class="flex flex-col gap-lg">
+<div class="border-b border-outline-variant pb-sm">
+<h3 class="font-h3 text-h3 text-on-background">AI Preferences</h3>
+<p class="font-body text-body text-on-surface-variant text-sm mt-1">Configure how the Knowledge Synthesizer processes and presents your data.</p>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Left Column: Radios & Toggles -->
+<div class="bg-surface border border-outline-variant rounded-full p-xl flex flex-col gap-lg">
+<div class="flex flex-col gap-sm">
+<label class="font-button text-button text-on-background">Summary Length</label>
+<div class="flex gap-md">
+<label class="flex items-center gap-xs cursor-pointer">
+<input class="text-primary focus:ring-primary border-outline-variant" name="summary" type="radio"/>
+<span class="font-body text-body text-sm text-on-surface-variant">Concise</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary border-outline-variant" name="summary" type="radio"/>
+<span class="font-body text-body text-sm text-on-surface-variant">Balanced</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer">
+<input class="text-primary focus:ring-primary border-outline-variant" name="summary" type="radio"/>
+<span class="font-body text-body text-sm text-on-surface-variant">Comprehensive</span>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-button text-button text-on-background">Output Tone</label>
+<div class="flex flex-wrap gap-md">
+<label class="flex items-center gap-xs cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary border-outline-variant" name="tone" type="radio"/>
+<span class="font-body text-body text-sm text-on-surface-variant">Academic</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer">
+<input class="text-primary focus:ring-primary border-outline-variant" name="tone" type="radio"/>
+<span class="font-body text-body text-sm text-on-surface-variant">Professional</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer">
+<input class="text-primary focus:ring-primary border-outline-variant" name="tone" type="radio"/>
+<span class="font-body text-body text-sm text-on-surface-variant">Conversational</span>
+</label>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-lg flex flex-col gap-md">
+<label class="flex items-center justify-between cursor-pointer">
+<div class="flex flex-col">
+<span class="font-button text-button text-on-background">Auto-tag Sources</span>
+<span class="font-body text-body text-xs text-on-surface-variant">Automatically categorize new documents.</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<div class="flex flex-col">
+<span class="font-button text-button text-on-background">Include Citations</span>
+<span class="font-body text-body text-xs text-on-surface-variant">Append source links to generated text.</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Right Column: Scheduling -->
+<div class="bg-surface border border-outline-variant rounded-full p-xl flex flex-col gap-lg">
+<div class="flex items-center gap-sm text-on-background">
+<span class="material-symbols-outlined">schedule</span>
+<h4 class="font-button text-button">Synthesis Schedule</h4>
+</div>
+<p class="font-body text-body text-sm text-on-surface-variant">Set a time for the AI to run daily batch synthesis on your new sources.</p>
+<div class="flex flex-col gap-xs mt-auto">
+<label class="font-button text-button text-on-background text-sm">Daily Processing Time</label>
+<input class="bg-surface-container-lowest border border-outline-variant rounded-xl px-md py-sm font-body text-body text-on-background focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all w-full" type="time" value="02:00"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Billing Section -->
+<section class="flex flex-col gap-lg">
+<div class="border-b border-outline-variant pb-sm">
+<h3 class="font-h3 text-h3 text-on-background">Billing &amp; Usage</h3>
+<p class="font-body text-body text-on-surface-variant text-sm mt-1">Monitor your workspace quotas and manage your subscription.</p>
+</div>
+<div class="grid grid-cols-3 gap-md">
+<!-- Plan Card -->
+<div class="col-span-1 bg-surface-container-lowest border border-outline-variant rounded-full p-xl flex flex-col gap-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-xs font-button text-primary uppercase tracking-wider">Current Plan</span>
+<h4 class="font-h3 text-h3 text-on-background mt-1">NGO Pro</h4>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed px-sm py-1 rounded-full text-xs font-button font-bold">Active</span>
+</div>
+<p class="font-body text-body text-sm text-on-surface-variant mb-auto">Specialized tier for non-profit research and synthesis.</p>
+<div class="flex flex-col gap-sm pt-md border-t border-outline-variant">
+<h5 class="text-on-background font-button text-button text-xl">$49<span class="text-sm font-body text-on-surface-variant font-normal">/month</span></h5>
+<button class="w-full bg-surface-container-high border border-outline-variant text-on-background font-button text-button px-md py-sm rounded-xl hover:bg-surface-container-highest transition-colors mt-2">
+                                    Manage Subscription
+                                </button>
+</div>
+</div>
+<!-- Usage Meters -->
+<div class="col-span-2 bg-surface border border-outline-variant rounded-full p-xl flex flex-col justify-between gap-lg">
+<h4 class="font-button text-button text-on-background">Workspace Usage</h4>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-end">
+<span class="font-body text-body text-sm text-on-surface-variant">Sources Indexed</span>
+<span class="font-button text-button text-sm text-on-background">8,420 / 10,000</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 84%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-end">
+<span class="font-body text-body text-sm text-on-surface-variant">AI Synthesis Tokens</span>
+<span class="font-button text-button text-sm text-on-background">1.2M / 2M</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 60%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-end">
+<span class="font-body text-body text-sm text-on-surface-variant">Storage Capacity</span>
+<span class="font-button text-button text-sm text-on-background">42 GB / 50 GB</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 84%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-slate-950 mt-auto">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-start gap-8">
+<div class="flex flex-col gap-2">
+<span class="text-base font-bold text-slate-900 dark:text-slate-50 font-['Inter']">Second Brain</span>
+<span class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400">© 2024 Knowledge Synthesizer. All rights reserved.</span>
+</div>
+<div class="flex gap-6 font-['Inter'] text-xs text-slate-500 dark:text-slate-400">
+<a class="hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Privacy Policy</a>
+<a class="hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Terms of Service</a>
+<a class="hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Security</a>
+<a class="hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

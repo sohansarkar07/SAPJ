@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Second Brain - Sources</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1c1b23",
+                        "tertiary": "#743300",
+                        "on-tertiary-fixed-variant": "#763300",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#321200",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#474554",
+                        "inverse-primary": "#c6bfff",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#fcf8ff",
+                        "on-primary-fixed": "#150066",
+                        "surface-container": "#f0ecf8",
+                        "surface-container-highest": "#e5e0ed",
+                        "secondary-fixed-dim": "#bcc5e9",
+                        "primary-fixed-dim": "#c6bfff",
+                        "error-container": "#ffdad6",
+                        "secondary": "#545e7c",
+                        "on-primary-container": "#d7d2ff",
+                        "surface-tint": "#5746d5",
+                        "secondary-container": "#cfd9fd",
+                        "on-secondary-container": "#545e7d",
+                        "primary-container": "#5645d4",
+                        "tertiary-fixed": "#ffdbc9",
+                        "inverse-on-surface": "#f3effb",
+                        "surface-container-high": "#ebe6f2",
+                        "outline": "#787586",
+                        "background": "#fcf8ff",
+                        "on-surface": "#1c1b23",
+                        "inverse-surface": "#312f38",
+                        "primary": "#3d27bc",
+                        "surface-bright": "#fcf8ff",
+                        "secondary-fixed": "#dae2ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffcdb1",
+                        "on-primary-fixed-variant": "#3e28bd",
+                        "surface-dim": "#dcd8e4",
+                        "surface-variant": "#e5e0ed",
+                        "on-secondary-fixed": "#101a36",
+                        "tertiary-container": "#994500",
+                        "outline-variant": "#c8c4d7",
+                        "surface-container-low": "#f6f2fe",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#e4dfff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "hero": "120px",
+                        "md": "16px",
+                        "lg": "20px",
+                        "section": "64px",
+                        "xl": "24px",
+                        "sm": "12px",
+                        "xxl": "32px"
+                    },
+                    "fontFamily": {
+                        "hero": ["Inter"],
+                        "h1": ["Inter"],
+                        "button": ["Inter"],
+                        "h2": ["Inter"],
+                        "h3": ["Inter"],
+                        "body": ["Inter"]
+                    },
+                    "fontSize": {
+                        "hero": ["80px", { "lineHeight": "1.1", "letterSpacing": "-2px", "fontWeight": "600" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+                        "button": ["14px", { "lineHeight": "1", "letterSpacing": "0px", "fontWeight": "500" }],
+                        "h2": ["36px", { "lineHeight": "1.3", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+                        "h3": ["28px", { "lineHeight": "1.4", "letterSpacing": "0px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "1.6", "letterSpacing": "0px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-body text-body">
+<!-- Side NavBar (Web) -->
+<nav class="hidden md:flex flex-col bg-[#fafaf9] dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 w-[240px] z-40 fixed left-0 top-0 h-screen py-8 gap-1">
+<div class="px-4 mb-section">
+<h1 class="text-lg font-semibold text-slate-800 dark:text-slate-100 font-['Inter'] text-sm tracking-tight">Second Brain</h1>
+<p class="text-xs text-outline font-['Inter']">Knowledge Synthesizer</p>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">home</span>
+                Home
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">psychology</span>
+                Brain Map
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 bg-white dark:bg-slate-800 border-l-[3px] border-[#5645d4] text-[#5645d4] font-semibold transition-all duration-200 ease-in-out font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">database</span>
+                Sources
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+                Synthesis
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out font-['Inter'] text-sm mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Top NavBar (Mobile) -->
+<header class="md:hidden bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 docked full-width top-0 sticky z-50 flex justify-between items-center px-6 py-3 w-full">
+<h1 class="text-xl font-bold text-slate-900 dark:text-slate-50 font-['Inter'] text-sm tracking-tight">Second Brain</h1>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[#5645d4] dark:text-[#7c6df2] hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer scale-100 active:scale-95 duration-150">search</span>
+<span class="material-symbols-outlined text-[#5645d4] dark:text-[#7c6df2] hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer scale-100 active:scale-95 duration-150">menu</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[240px] flex flex-col min-h-screen bg-background">
+<!-- Header Section -->
+<header class="px-xl py-xl border-b border-outline-variant/30 flex justify-between items-center bg-surface sticky top-0 z-30">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Connected Sources</h2>
+<p class="text-on-surface-variant mt-xs">Manage the data streams feeding your knowledge base.</p>
+</div>
+<button class="bg-primary text-on-primary font-button text-button px-md py-sm rounded-DEFAULT hover:bg-primary-fixed-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Add New Source
+            </button>
+</header>
+<!-- Content Area -->
+<div class="flex-1 p-xl overflow-y-auto">
+<!-- Grid: Connected Sources -->
+<section class="mb-section">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+<!-- Source Card 1: Gmail -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-md flex flex-col justify-between hover:border-primary-container/50 transition-colors group h-[160px]">
+<div class="flex justify-between items-start">
+<div class="w-[40px] h-[40px] rounded-lg bg-red-50 flex items-center justify-center text-red-500">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-[6px] h-[6px] rounded-full bg-green-500 block"></span>
+                                Connected
+                            </span>
+</div>
+<div>
+<h3 class="font-h3 text-[16px] font-semibold text-on-surface">Gmail</h3>
+<p class="text-[12px] text-on-surface-variant mt-1">Last sync: 2 mins ago</p>
+<p class="text-[12px] text-outline mt-xs truncate">user@example.com</p>
+</div>
+</div>
+<!-- Source Card 2: Drive -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-md flex flex-col justify-between hover:border-primary-container/50 transition-colors group h-[160px]">
+<div class="flex justify-between items-start">
+<div class="w-[40px] h-[40px] rounded-lg bg-blue-50 flex items-center justify-center text-blue-500">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px] animate-spin">sync</span>
+                                Syncing
+                            </span>
+</div>
+<div>
+<h3 class="font-h3 text-[16px] font-semibold text-on-surface">Google Drive</h3>
+<div class="w-full bg-surface-variant rounded-full h-[4px] mt-2 mb-1">
+<div class="bg-primary h-[4px] rounded-full w-2/3"></div>
+</div>
+<p class="text-[12px] text-on-surface-variant">Indexing 4,201 files...</p>
+</div>
+</div>
+<!-- Source Card 3: PDF / Local -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-md flex flex-col justify-between hover:border-primary-container/50 transition-colors group h-[160px]">
+<div class="flex justify-between items-start">
+<div class="w-[40px] h-[40px] rounded-lg bg-orange-50 flex items-center justify-center text-orange-500">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-[6px] h-[6px] rounded-full bg-green-500 block"></span>
+                                Connected
+                            </span>
+</div>
+<div>
+<h3 class="font-h3 text-[16px] font-semibold text-on-surface">Local Documents</h3>
+<p class="text-[12px] text-on-surface-variant mt-1">Last sync: 1 hr ago</p>
+<p class="text-[12px] text-outline mt-xs truncate">/users/docs/research</p>
+</div>
+</div>
+<!-- Source Card 4: Slack -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-md flex flex-col justify-between hover:border-primary-container/50 transition-colors group h-[160px]">
+<div class="flex justify-between items-start">
+<div class="w-[40px] h-[40px] rounded-lg bg-purple-50 flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+</div>
+<span class="bg-orange-100 text-orange-800 text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-[6px] h-[6px] rounded-full bg-orange-500 block"></span>
+                                Paused
+                            </span>
+</div>
+<div>
+<h3 class="font-h3 text-[16px] font-semibold text-on-surface">Slack Workspace</h3>
+<p class="text-[12px] text-error mt-1">Authentication required</p>
+<button class="text-[12px] text-primary font-medium mt-xs hover:underline">Reconnect</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Grid: Add More (Suggested) -->
+<section class="mb-section">
+<h3 class="font-h3 text-h3 text-on-surface mb-md">Available Integrations</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-sm">
+<button class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm flex flex-col items-center justify-center gap-xs hover:bg-surface-container-low hover:border-primary-container transition-colors h-[100px]">
+<span class="material-symbols-outlined text-outline">description</span>
+<span class="text-[12px] font-medium text-on-surface-variant">Notion</span>
+</button>
+<button class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm flex flex-col items-center justify-center gap-xs hover:bg-surface-container-low hover:border-primary-container transition-colors h-[100px]">
+<span class="material-symbols-outlined text-outline">chat</span>
+<span class="text-[12px] font-medium text-on-surface-variant">WhatsApp</span>
+</button>
+<button class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm flex flex-col items-center justify-center gap-xs hover:bg-surface-container-low hover:border-primary-container transition-colors h-[100px]">
+<span class="material-symbols-outlined text-outline">calendar_today</span>
+<span class="text-[12px] font-medium text-on-surface-variant">Calendar</span>
+</button>
+<button class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm flex flex-col items-center justify-center gap-xs hover:bg-surface-container-low hover:border-primary-container transition-colors h-[100px]">
+<span class="material-symbols-outlined text-outline">link</span>
+<span class="text-[12px] font-medium text-on-surface-variant">Webhooks</span>
+</button>
+</div>
+</section>
+<!-- Activity Log -->
+<section class="mb-section max-w-3xl">
+<h3 class="font-h3 text-h3 text-on-surface mb-md">Sync Activity</h3>
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-lg">
+<div class="relative pl-6 border-l border-outline-variant/30 space-y-lg">
+<!-- Log Item 1 -->
+<div class="relative">
+<span class="absolute -left-[31px] bg-surface-container-lowest border border-outline-variant rounded-full w-[14px] h-[14px] flex items-center justify-center">
+<span class="bg-primary w-[6px] h-[6px] rounded-full"></span>
+</span>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[14px] font-medium text-on-surface">Parsed 14 new documents from Gmail</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Tags extracted: #receipts, #travel, #q3-planning</p>
+</div>
+<span class="text-[12px] text-outline">2 mins ago</span>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="relative">
+<span class="absolute -left-[31px] bg-surface-container-lowest border border-outline-variant rounded-full w-[14px] h-[14px] flex items-center justify-center">
+<span class="bg-secondary w-[6px] h-[6px] rounded-full"></span>
+</span>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[14px] font-medium text-on-surface">Google Drive full sync completed</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Indexed 4,201 files. Found 23 duplicate entries.</p>
+</div>
+<span class="text-[12px] text-outline">1 hr ago</span>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="relative">
+<span class="absolute -left-[31px] bg-surface-container-lowest border border-error/50 rounded-full w-[14px] h-[14px] flex items-center justify-center">
+<span class="bg-error w-[6px] h-[6px] rounded-full"></span>
+</span>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[14px] font-medium text-on-surface text-error">Slack connection failed</p>
+<p class="text-[12px] text-on-surface-variant mt-1">OAuth token expired. Re-authentication required to resume syncing.</p>
+</div>
+<span class="text-[12px] text-outline">3 hrs ago</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-slate-950 mt-auto">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-start gap-8">
+<div>
+<span class="text-base font-bold text-slate-900 dark:text-slate-50 font-['Inter'] text-xs text-slate-500 dark:text-slate-400">Second Brain</span>
+<p class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 mt-2">© 2024 Knowledge Synthesizer. All rights reserved.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Security</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

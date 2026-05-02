@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Second Brain - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1c1b23",
+                    "tertiary": "#743300",
+                    "on-tertiary-fixed-variant": "#763300",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#321200",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#474554",
+                    "inverse-primary": "#c6bfff",
+                    "tertiary-fixed-dim": "#ffb68d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface": "#fcf8ff",
+                    "on-primary-fixed": "#150066",
+                    "surface-container": "#f0ecf8",
+                    "surface-container-highest": "#e5e0ed",
+                    "secondary-fixed-dim": "#bcc5e9",
+                    "primary-fixed-dim": "#c6bfff",
+                    "error-container": "#ffdad6",
+                    "secondary": "#545e7c",
+                    "on-primary-container": "#d7d2ff",
+                    "surface-tint": "#5746d5",
+                    "secondary-container": "#cfd9fd",
+                    "on-secondary-container": "#545e7d",
+                    "primary-container": "#5645d4",
+                    "tertiary-fixed": "#ffdbc9",
+                    "inverse-on-surface": "#f3effb",
+                    "surface-container-high": "#ebe6f2",
+                    "outline": "#787586",
+                    "background": "#fcf8ff",
+                    "on-surface": "#1c1b23",
+                    "inverse-surface": "#312f38",
+                    "primary": "#3d27bc",
+                    "surface-bright": "#fcf8ff",
+                    "secondary-fixed": "#dae2ff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#ffcdb1",
+                    "on-primary-fixed-variant": "#3e28bd",
+                    "surface-dim": "#dcd8e4",
+                    "surface-variant": "#e5e0ed",
+                    "on-secondary-fixed": "#101a36",
+                    "tertiary-container": "#994500",
+                    "outline-variant": "#c8c4d7",
+                    "surface-container-low": "#f6f2fe",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#e4dfff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "hero": "120px",
+                    "md": "16px",
+                    "lg": "20px",
+                    "section": "64px",
+                    "xl": "24px",
+                    "sm": "12px",
+                    "xxl": "32px"
+            },
+            "fontFamily": {
+                    "hero": ["Inter"],
+                    "h1": ["Inter"],
+                    "button": ["Inter"],
+                    "h2": ["Inter"],
+                    "h3": ["Inter"],
+                    "body": ["Inter"]
+            },
+            "fontSize": {
+                    "hero": ["80px", {"lineHeight": "1.1", "letterSpacing": "-2px", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "600"}],
+                    "button": ["14px", {"lineHeight": "1", "letterSpacing": "0px", "fontWeight": "500"}],
+                    "h2": ["36px", {"lineHeight": "1.3", "letterSpacing": "-0.5px", "fontWeight": "600"}],
+                    "h3": ["28px", {"lineHeight": "1.4", "letterSpacing": "0px", "fontWeight": "600"}],
+                    "body": ["16px", {"lineHeight": "1.6", "letterSpacing": "0px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body text-body min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-[#fafaf9] dark:bg-slate-900 font-['Inter'] text-sm fixed left-0 top-0 h-screen w-[240px] z-40 border-r border-slate-200 dark:border-slate-800 flex-col gap-1 py-8">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+<span class="text-xl">⚡</span> Second Brain
+            </h1>
+<p class="text-xs text-slate-500 mt-1">Knowledge Synthesizer</p>
+</div>
+<div class="flex-1 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 bg-white dark:bg-slate-800 border-l-[3px] border-[#5645d4] text-[#5645d4] font-semibold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">home</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">psychology</span>
+                Brain Map
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">database</span>
+                Sources
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">search</span>
+                Smart Search
+            </a>
+<div class="mt-4 mb-2 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">NGO Tools</div>
+<a class="flex items-center justify-between px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">edit_document</span>
+                    Grant Writer
+                </div>
+<span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-1.5 py-0.5 rounded-full">NEW</span>
+</a>
+<a class="flex items-center justify-between px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">calendar_month</span>
+                    Volunteer Schedule
+                </div>
+<span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-1.5 py-0.5 rounded-full">NEW</span>
+</a>
+<a class="flex items-center justify-between px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">monitoring</span>
+                    Impact Reports
+                </div>
+<span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-1.5 py-0.5 rounded-full">NEW</span>
+</a>
+<div class="mt-4 mb-2 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">Study</div>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">style</span>
+                Flashcards
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto px-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">
+                    PS
+                </div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">Priya Sharma</p>
+<p class="text-xs text-slate-500 truncate">NGO Pro Plan</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">more_vert</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[240px] flex flex-col min-h-screen">
+<!-- TopNavBar Custom -->
+<header class="bg-surface-lowest/80 backdrop-blur-md font-['Inter'] text-sm font-medium tracking-tight border-b border-surface-variant flex justify-between items-center px-6 py-3 w-full sticky top-0 z-30">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span>Dashboard</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-on-surface">Overview</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block w-[400px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search your brain..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-primary-container/10 text-primary px-3 py-1.5 rounded-full">
+<span class="text-lg">✨</span>
+<span class="text-xs font-semibold">Digest Ready</span>
+</div>
+<button class="relative text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-surface-lowest"></span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 p-6 lg:p-8 overflow-y-auto bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto flex flex-col gap-8">
+<!-- Morning Digest Banner -->
+<div class="bg-primary text-on-primary rounded-xl p-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-primary-fixed-variant opacity-50 pointer-events-none"></div>
+<div class="relative z-10">
+<h2 class="font-h2 text-h2 mb-2">🌅 Good morning, Priya.</h2>
+<p class="text-primary-fixed-dim max-w-lg">Your second brain has synthesized 12 new sources while you were away. Here's what you need to know today.</p>
+</div>
+<div class="relative z-10 flex flex-col gap-3 min-w-[250px]">
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-surface-lowest/20 flex items-center justify-between">
+<span class="text-sm">Grant proposal draft</span>
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-surface-lowest/20 flex items-center justify-between">
+<span class="text-sm">3 volunteer clashes</span>
+<span class="material-symbols-outlined text-sm">warning</span>
+</div>
+<div class="bg-surface-container-lowest/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-surface-lowest/20 flex items-center justify-between">
+<span class="text-sm">New research paper added</span>
+<span class="material-symbols-outlined text-sm">article</span>
+</div>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">database</span>
+<span class="text-sm font-medium">Total Sources</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-semibold text-on-surface">1,432</span>
+<span class="text-xs text-secondary mb-1">+12 this week</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">psychology</span>
+<span class="text-sm font-medium">Synthesized</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-semibold text-on-surface">89%</span>
+<span class="text-xs text-secondary mb-1">Coverage</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span class="text-sm font-medium">Time Saved</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-semibold text-on-surface">42h</span>
+<span class="text-xs text-secondary mb-1">This month</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-2 relative overflow-hidden">
+<div class="absolute right-0 top-0 w-16 h-16 bg-primary-container/10 rounded-bl-full"></div>
+<div class="flex items-center gap-2 text-on-surface-variant relative z-10">
+<span class="material-symbols-outlined text-sm text-primary">edit_document</span>
+<span class="text-sm font-medium text-primary">Active Grant</span>
+</div>
+<div class="flex items-end gap-2 relative z-10">
+<span class="text-3xl font-semibold text-on-surface">Draft</span>
+<span class="text-xs text-primary mb-1">In progress</span>
+</div>
+</div>
+</div>
+<!-- 2 Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column (60%) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="font-h3 text-h3 text-on-surface">Recent Insights</h3>
+<button class="font-button text-button text-primary hover:underline">View all</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Insight Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 hover:border-primary/50 transition-colors group cursor-pointer flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Action Req</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface mb-1">Board Meeting Prep</h4>
+<p class="text-sm text-on-surface-variant line-clamp-2">Synthesized from 4 emails regarding the Q3 impact metrics. Key talking points extracted.</p>
+</div>
+<div class="mt-auto pt-3 border-t border-surface-variant flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>2 hours ago</span>
+</div>
+</div>
+<!-- Insight Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 hover:border-primary/50 transition-colors group cursor-pointer flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<span class="bg-tertiary-container/20 text-tertiary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Research</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface mb-1">Climate Policy 2024</h4>
+<p class="text-sm text-on-surface-variant line-clamp-2">Summary of the 45-page UN report. Extracted 5 key statistics relevant to our current grant proposal.</p>
+</div>
+<div class="mt-auto pt-3 border-t border-surface-variant flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>5 hours ago</span>
+</div>
+</div>
+<!-- Insight Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 hover:border-primary/50 transition-colors group cursor-pointer flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</div>
+<span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Team</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface mb-1">Volunteer Training Sync</h4>
+<p class="text-sm text-on-surface-variant line-clamp-2">Captured decisions from the #volunteer-coordination channel. New protocol approved.</p>
+</div>
+<div class="mt-auto pt-3 border-t border-surface-variant flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Yesterday</span>
+</div>
+</div>
+<!-- Insight Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 hover:border-primary/50 transition-colors group cursor-pointer flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+</div>
+<span class="bg-surface-variant text-on-surface-variant text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Update</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface mb-1">Q2 Financials</h4>
+<p class="text-sm text-on-surface-variant line-clamp-2">Spreadsheet updated. Anomaly detected in marketing spend vs projected budget.</p>
+</div>
+<div class="mt-auto pt-3 border-t border-surface-variant flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Yesterday</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (40%) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Grant Deadline Alert -->
+<div class="bg-surface-container-lowest border border-tertiary rounded-xl p-5 shadow-[0_2px_8px_rgba(153,69,0,0.05)]">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">warning</span>
+<h4 class="font-semibold text-on-surface">Global Health Grant</h4>
+</div>
+<span class="text-xs font-bold text-tertiary">3 Days Left</span>
+</div>
+<div class="mb-2 flex justify-between text-sm">
+<span class="text-on-surface-variant">Draft Progress</span>
+<span class="font-medium text-on-surface">80%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-4">
+<div class="bg-tertiary h-2 rounded-full" style="width: 80%"></div>
+</div>
+<button class="w-full bg-surface-container hover:bg-surface-variant text-on-surface font-button text-button py-2 rounded-lg border border-outline-variant transition-colors">
+                                Resume Writing
+                            </button>
+</div>
+<!-- Connected Sources Grid -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5">
+<h4 class="font-semibold text-on-surface mb-4">Connected Sources</h4>
+<div class="grid grid-cols-4 gap-3">
+<div class="aspect-square bg-surface-container rounded-lg flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors cursor-pointer border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">mail</span>
+<span class="text-[10px] text-on-surface-variant font-medium">Gmail</span>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors cursor-pointer border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">folder</span>
+<span class="text-[10px] text-on-surface-variant font-medium">Drive</span>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors cursor-pointer border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">chat</span>
+<span class="text-[10px] text-on-surface-variant font-medium">Slack</span>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors cursor-pointer border border-outline-variant border-dashed">
+<span class="material-symbols-outlined text-outline">add</span>
+<span class="text-[10px] text-outline font-medium">Add</span>
+</div>
+</div>
+</div>
+<!-- Volunteer Schedule Widget -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 flex-1">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-semibold text-on-surface">Volunteer Schedule</h4>
+<span class="bg-primary-container text-on-primary-container text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex flex-col items-center justify-center text-xs font-semibold text-on-surface">
+<span>12</span>
+<span class="text-[8px] uppercase">Oct</span>
+</div>
+<div>
+<p class="text-sm font-medium text-on-surface">Community Cleanup</p>
+<p class="text-xs text-on-surface-variant">14/20 Volunteers confirmed</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex flex-col items-center justify-center text-xs font-semibold text-on-surface">
+<span>15</span>
+<span class="text-[8px] uppercase">Oct</span>
+</div>
+<div>
+<p class="text-sm font-medium text-on-surface">Food Drive Sorting</p>
+<p class="text-xs text-error font-medium">Action Needed: 2 dropouts</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 text-primary font-button text-button text-sm hover:underline text-center">
+                                Open Full Schedule
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

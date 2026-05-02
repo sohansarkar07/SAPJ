@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grant Writer - Second Brain</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1c1b23",
+                        "tertiary": "#743300",
+                        "on-tertiary-fixed-variant": "#763300",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#321200",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#474554",
+                        "inverse-primary": "#c6bfff",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#fcf8ff",
+                        "on-primary-fixed": "#150066",
+                        "surface-container": "#f0ecf8",
+                        "surface-container-highest": "#e5e0ed",
+                        "secondary-fixed-dim": "#bcc5e9",
+                        "primary-fixed-dim": "#c6bfff",
+                        "error-container": "#ffdad6",
+                        "secondary": "#545e7c",
+                        "on-primary-container": "#d7d2ff",
+                        "surface-tint": "#5746d5",
+                        "secondary-container": "#cfd9fd",
+                        "on-secondary-container": "#545e7d",
+                        "primary-container": "#5645d4",
+                        "tertiary-fixed": "#ffdbc9",
+                        "inverse-on-surface": "#f3effb",
+                        "surface-container-high": "#ebe6f2",
+                        "outline": "#787586",
+                        "background": "#fcf8ff",
+                        "on-surface": "#1c1b23",
+                        "inverse-surface": "#312f38",
+                        "primary": "#3d27bc",
+                        "surface-bright": "#fcf8ff",
+                        "secondary-fixed": "#dae2ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffcdb1",
+                        "on-primary-fixed-variant": "#3e28bd",
+                        "surface-dim": "#dcd8e4",
+                        "surface-variant": "#e5e0ed",
+                        "on-secondary-fixed": "#101a36",
+                        "tertiary-container": "#994500",
+                        "outline-variant": "#c8c4d7",
+                        "surface-container-low": "#f6f2fe",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#e4dfff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "hero": "120px",
+                        "md": "16px",
+                        "lg": "20px",
+                        "section": "64px",
+                        "xl": "24px",
+                        "sm": "12px",
+                        "xxl": "32px"
+                    },
+                    "fontFamily": {
+                        "hero": ["Inter"],
+                        "h1": ["Inter"],
+                        "button": ["Inter"],
+                        "h2": ["Inter"],
+                        "h3": ["Inter"],
+                        "body": ["Inter"]
+                    },
+                    "fontSize": {
+                        "hero": ["80px", { "lineHeight": "1.1", "letterSpacing": "-2px", "fontWeight": "600" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+                        "button": ["14px", { "lineHeight": "1", "letterSpacing": "0px", "fontWeight": "500" }],
+                        "h2": ["36px", { "lineHeight": "1.3", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+                        "h3": ["28px", { "lineHeight": "1.4", "letterSpacing": "0px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "1.6", "letterSpacing": "0px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body text-body min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-[#fafaf9] dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 fixed left-0 top-0 h-screen w-[240px] z-40 flex flex-col gap-1 py-8 hidden md:flex font-['Inter'] text-sm">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-semibold text-slate-800 dark:text-slate-100">Second Brain</h1>
+<p class="text-xs text-slate-500">Knowledge Synthesizer</p>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">home</span>
+                Home
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">psychology</span>
+                Brain Map
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">database</span>
+                Sources
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 bg-white dark:bg-slate-800 border-l-[3px] border-[#5645d4] text-[#5645d4] font-semibold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+                Synthesis
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[240px] flex flex-col h-screen overflow-hidden">
+<!-- Header -->
+<header class="bg-surface-container-lowest border-b border-outline-variant/30 px-xl py-lg flex justify-between items-center shrink-0">
+<h2 class="font-h2 text-h2 text-on-surface">Grant Writer</h2>
+<button class="bg-tertiary-container text-on-tertiary-container font-button text-button px-lg py-sm rounded-DEFAULT hover:opacity-90 transition-opacity flex items-center gap-xs">
+                New Grant Application <span class="material-symbols-outlined text-sm">add</span>
+</button>
+</header>
+<!-- 3 Column Layout -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Column: MY GRANTS -->
+<div class="w-[30%] min-w-[280px] max-w-[350px] border-r border-outline-variant/30 bg-surface-container-lowest overflow-y-auto flex flex-col">
+<div class="p-lg border-b border-outline-variant/30 shrink-0">
+<h3 class="font-button text-button text-secondary uppercase tracking-wider mb-md">MY GRANTS</h3>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+<input class="w-full bg-surface-container pl-[36px] pr-sm py-xs rounded-DEFAULT border-none text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="Search grants..." type="text"/>
+</div>
+</div>
+<div class="flex-1 p-sm flex flex-col gap-xs">
+<!-- Grant Item: Active -->
+<div class="p-md bg-primary-container/10 border border-primary-container/20 rounded-lg cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-body text-body font-medium text-on-surface">CSIR Science Fund</h4>
+<span class="bg-secondary-container text-on-secondary-container text-[11px] font-semibold px-2 py-0.5 rounded-full">Draft</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">Research proposal for advanced nanomaterials synthesis and application in renewable energy storage.</p>
+<p class="text-xs text-outline mt-sm">Last edited 2 hrs ago</p>
+</div>
+<!-- Grant Item -->
+<div class="p-md hover:bg-surface-container rounded-lg cursor-pointer transition-colors border border-transparent">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-body text-body font-medium text-on-surface">ActionAid Grant</h4>
+<span class="bg-[#dcfce7] text-[#166534] text-[11px] font-semibold px-2 py-0.5 rounded-full">Submitted</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">Community development initiative focusing on clean water access in rural districts.</p>
+<p class="text-xs text-outline mt-sm">Submitted on Oct 12</p>
+</div>
+<!-- Grant Item -->
+<div class="p-md hover:bg-surface-container rounded-lg cursor-pointer transition-colors border border-transparent">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-body text-body font-medium text-on-surface">Tata Innovation</h4>
+<span class="bg-surface-variant text-on-surface-variant text-[11px] font-semibold px-2 py-0.5 rounded-full">Not Started</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">Technology incubation for AI-driven agricultural solutions.</p>
+<p class="text-xs text-outline mt-sm">Due Nov 30</p>
+</div>
+</div>
+</div>
+<!-- Center Column: Grant Editor -->
+<div class="flex-1 flex flex-col bg-background relative overflow-hidden">
+<!-- Toolbar -->
+<div class="bg-surface-container-lowest border-b border-outline-variant/30 p-sm flex items-center justify-between shrink-0">
+<div class="flex items-center gap-xs">
+<button class="p-xs hover:bg-surface-container rounded-DEFAULT text-on-surface-variant transition-colors" title="Format Text"><span class="material-symbols-outlined">format_bold</span></button>
+<button class="p-xs hover:bg-surface-container rounded-DEFAULT text-on-surface-variant transition-colors" title="Format Text"><span class="material-symbols-outlined">format_italic</span></button>
+<div class="w-[1px] h-4 bg-outline-variant/50 mx-xs"></div>
+<button class="p-xs hover:bg-surface-container rounded-DEFAULT text-on-surface-variant transition-colors" title="List"><span class="material-symbols-outlined">format_list_bulleted</span></button>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs bg-primary-container/10 text-primary-fixed-variant hover:bg-primary-container/20 px-sm py-xs rounded-DEFAULT font-button text-[13px] transition-colors border border-primary-container/20">
+<span class="material-symbols-outlined text-sm">auto_awesome</span> Improve Tone
+                        </button>
+<button class="flex items-center gap-xs bg-primary-container/10 text-primary-fixed-variant hover:bg-primary-container/20 px-sm py-xs rounded-DEFAULT font-button text-[13px] transition-colors border border-primary-container/20">
+<span class="material-symbols-outlined text-sm">summarize</span> Generate Abstract
+                        </button>
+</div>
+</div>
+<!-- Editor Area -->
+<div class="flex-1 overflow-y-auto p-xl lg:px-section max-w-4xl mx-auto w-full">
+<div class="mb-lg">
+<input class="w-full text-[40px] font-h1 font-semibold text-on-background bg-transparent border-none outline-none p-0 focus:ring-0 mb-sm" placeholder="Grant Title" type="text" value="CSIR Science Fund Proposal"/>
+<p class="text-secondary text-sm">Target Agency: Council of Scientific and Industrial Research</p>
+</div>
+<div class="space-y-xl">
+<!-- Section: Abstract -->
+<div class="group">
+<div class="flex items-center gap-sm mb-xs">
+<h3 class="font-h3 text-xl text-on-background">1. Executive Summary</h3>
+<span class="bg-inverse-primary/30 text-primary-fixed-variant text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span> AI Generated
+                                </span>
+</div>
+<div class="p-md bg-surface-container-lowest border border-outline-variant/30 rounded-lg shadow-sm font-body text-body leading-relaxed text-on-surface min-h-[100px] outline-none focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all" contenteditable="true">
+                                This proposal requests funding for the development of novel, scalable nanomaterials for integration into next-generation solid-state batteries. The primary objective is to significantly increase energy density while reducing manufacturing costs. By leveraging advanced machine learning models to predict optimal material compositions, we anticipate a 30% reduction in R&amp;D time compared to traditional iterative methods.
+                            </div>
+</div>
+<!-- Section: Problem Statement -->
+<div class="group">
+<div class="flex items-center gap-sm mb-xs">
+<h3 class="font-h3 text-xl text-on-background">2. Problem Statement</h3>
+</div>
+<div class="p-md bg-surface-container-lowest border border-outline-variant/30 rounded-lg shadow-sm font-body text-body leading-relaxed text-on-surface min-h-[150px] outline-none focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all" contenteditable="true">
+                                Current lithium-ion technology is approaching its theoretical limits regarding energy density and safety. Liquid electrolytes present ongoing flammability risks, and the reliance on scarce materials like cobalt raises supply chain and ethical concerns. There is a critical need for alternative energy storage solutions that are safer, more efficient, and utilize abundant materials.
+                            </div>
+</div>
+<!-- Section: Methodology -->
+<div class="group">
+<div class="flex items-center gap-sm mb-xs">
+<h3 class="font-h3 text-xl text-on-background">3. Methodology</h3>
+<span class="bg-inverse-primary/30 text-primary-fixed-variant text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span> AI Drafted
+                                </span>
+</div>
+<div class="p-md bg-surface-container-lowest border border-outline-variant/30 rounded-lg shadow-sm font-body text-body leading-relaxed text-on-surface min-h-[150px] outline-none focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all text-on-surface-variant italic" contenteditable="true">
+                                [Drafting... Consider adding details from recent lab notes on polymer electrolytes.]
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sources Used -->
+<div class="w-[280px] bg-surface-container-lowest border-l border-outline-variant/30 flex flex-col shrink-0">
+<div class="p-md border-b border-outline-variant/30 shrink-0 flex items-center justify-between">
+<h3 class="font-button text-button text-secondary uppercase tracking-wider">SOURCES USED</h3>
+<span class="bg-surface-variant text-on-surface text-xs px-2 py-0.5 rounded-full">3</span>
+</div>
+<div class="flex-1 overflow-y-auto p-sm gap-sm flex flex-col">
+<!-- Source Item -->
+<div class="p-sm border border-outline-variant/30 rounded-DEFAULT bg-surface hover:bg-surface-container transition-colors cursor-pointer flex gap-sm items-start">
+<div class="bg-error/10 text-error p-1 rounded">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-on-surface truncate">Battery_Tech_Review_2023.pdf</p>
+<p class="text-[11px] text-outline mt-0.5">Referenced in Problem Statement</p>
+</div>
+</div>
+<!-- Source Item -->
+<div class="p-sm border border-outline-variant/30 rounded-DEFAULT bg-surface hover:bg-surface-container transition-colors cursor-pointer flex gap-sm items-start">
+<div class="bg-error/10 text-error p-1 rounded">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-on-surface truncate">CSIR_Guidelines_24.pdf</p>
+<p class="text-[11px] text-outline mt-0.5">Formatting constraints</p>
+</div>
+</div>
+<!-- Source Item -->
+<div class="p-sm border border-outline-variant/30 rounded-DEFAULT bg-surface hover:bg-surface-container transition-colors cursor-pointer flex gap-sm items-start">
+<div class="bg-primary/10 text-primary p-1 rounded">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-on-surface truncate">Fwd: Material specs from Dr. Chen</p>
+<p class="text-[11px] text-outline mt-0.5">Used in Methodology</p>
+</div>
+</div>
+</div>
+<div class="p-sm border-t border-outline-variant/30">
+<button class="w-full py-xs border border-dashed border-outline rounded-DEFAULT text-sm text-secondary hover:bg-surface-container transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-sm">add</span> Add Source
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

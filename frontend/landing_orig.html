@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Second Brain - Knowledge Synthesizer</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#1c1b23",
+            "tertiary": "#743300",
+            "on-tertiary-fixed-variant": "#763300",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#321200",
+            "on-secondary-fixed-variant": "#3c4663",
+            "on-tertiary": "#ffffff",
+            "on-surface-variant": "#474554",
+            "inverse-primary": "#c6bfff",
+            "tertiary-fixed-dim": "#ffb68d",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "surface": "#fcf8ff",
+            "on-primary-fixed": "#150066",
+            "surface-container": "#f0ecf8",
+            "surface-container-highest": "#e5e0ed",
+            "secondary-fixed-dim": "#bcc5e9",
+            "primary-fixed-dim": "#c6bfff",
+            "error-container": "#ffdad6",
+            "secondary": "#545e7c",
+            "on-primary-container": "#d7d2ff",
+            "surface-tint": "#5746d5",
+            "secondary-container": "#cfd9fd",
+            "on-secondary-container": "#545e7d",
+            "primary-container": "#5645d4",
+            "tertiary-fixed": "#ffdbc9",
+            "inverse-on-surface": "#f3effb",
+            "surface-container-high": "#ebe6f2",
+            "outline": "#787586",
+            "background": "#fcf8ff",
+            "on-surface": "#1c1b23",
+            "inverse-surface": "#312f38",
+            "primary": "#3d27bc",
+            "surface-bright": "#fcf8ff",
+            "secondary-fixed": "#dae2ff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#ffcdb1",
+            "on-primary-fixed-variant": "#3e28bd",
+            "surface-dim": "#dcd8e4",
+            "surface-variant": "#e5e0ed",
+            "on-secondary-fixed": "#101a36",
+            "tertiary-container": "#994500",
+            "outline-variant": "#c8c4d7",
+            "surface-container-low": "#f6f2fe",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#e4dfff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "xs": "8px",
+            "hero": "120px",
+            "md": "16px",
+            "lg": "20px",
+            "section": "64px",
+            "xl": "24px",
+            "sm": "12px",
+            "xxl": "32px"
+          },
+          "fontFamily": {
+            "hero": ["Inter"],
+            "h1": ["Inter"],
+            "button": ["Inter"],
+            "h2": ["Inter"],
+            "h3": ["Inter"],
+            "body": ["Inter"]
+          },
+          "fontSize": {
+            "hero": ["64px", { "lineHeight": "1.1", "letterSpacing": "-2px", "fontWeight": "700" }],
+            "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+            "button": ["14px", { "lineHeight": "1", "letterSpacing": "0px", "fontWeight": "500" }],
+            "h2": ["36px", { "lineHeight": "1.3", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+            "h3": ["24px", { "lineHeight": "1.4", "letterSpacing": "0px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "1.6", "letterSpacing": "0px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background text-on-background font-body text-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+  <!-- TopNavBar (Shared Component Translation) -->
+  <header
+    class="bg-white/80 dark:bg-slate-950/80 backdrop-blur-md docked full-width top-0 sticky z-50 border-b border-slate-200 dark:border-slate-800 flat no shadows flex justify-between items-center px-6 py-3 w-full">
+    <div class="flex items-center gap-8">
+      <a class="text-xl font-bold text-slate-900 dark:text-slate-50 flex items-center gap-2" href="#">
+        <span class="text-2xl">⚡</span> Second Brain
+      </a>
+      <nav class="hidden md:flex items-center gap-6 font-['Inter'] text-sm font-medium tracking-tight">
+        <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150"
+          href="#who-its-for">Who It's For</a>
+        <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150"
+          href="#features">Features</a>
+        <a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors scale-100 active:scale-95 duration-150"
+          href="#pricing">Pricing</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <a class="font-button text-button text-on-surface hover:text-primary transition-colors" href="#">Log in</a>
+      <a class="bg-primary-container text-on-primary-container font-button text-button px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
+        href="#">Get Started Free</a>
+    </div>
+  </header>
+  <main>
+    <!-- Hero Section -->
+    <section class="relative bg-[#0a1530] text-white pt-24 pb-48 overflow-hidden">
+      <!-- Decorative Dots -->
+      <div class="absolute top-20 left-10 w-3 h-3 rounded-full bg-pink-400 opacity-50"></div>
+      <div class="absolute top-40 right-20 w-4 h-4 rounded-full bg-yellow-400 opacity-50"></div>
+      <div class="absolute bottom-40 left-1/4 w-5 h-5 rounded-full bg-teal-400 opacity-50"></div>
+      <div class="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-orange-400 opacity-50"></div>
+      <div class="absolute bottom-20 right-10 w-4 h-4 rounded-full bg-green-400 opacity-50"></div>
+      <div class="max-w-7xl mx-auto px-6 text-center relative z-10 flex flex-col items-center">
+        <span
+          class="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm font-medium text-white/90 mb-8 backdrop-blur-sm">
+          New Identity: The Knowledge Synthesizer
+        </span>
+        <h1 class="font-hero text-hero text-white max-w-5xl mb-6 leading-[1.1]">
+          Second Brain for NGOs, Teams &amp; Knowledge Workers
+        </h1>
+        <p class="font-body text-body text-white/70 max-w-3xl mb-10 text-xl leading-relaxed">
+          AI that eliminates information overload and automates manual tasks — giving organizations back <span
+            class="text-white font-semibold">10+ hours every week</span>.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a class="bg-primary-container text-on-primary-container font-button text-button px-8 py-4 rounded-lg hover:opacity-90 transition-opacity text-base shadow-lg shadow-primary-container/20"
+            href="#">
+            Start Synthesizing
+          </a>
+          <a class="border border-white/20 bg-white/5 text-white font-button text-button px-8 py-4 rounded-lg hover:bg-white/10 transition-colors text-base"
+            href="#">
+            Book a Demo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mockup Section -->
+    <section class="max-w-6xl mx-auto px-6 -mt-32 relative z-20 mb-24">
+      <div class="bg-surface rounded-xl border border-outline-variant p-2 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+        <div class="rounded-lg overflow-hidden border border-outline-variant bg-white">
+          <img alt="Dashboard Preview" class="w-full h-auto object-cover object-top aspect-[16/9]"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqGvo8uG7fKwGXBDlDGLB2ybZJufGYtJEO3RMe4bLxTAJcbaJzkktdfCUpm0_LfRnxXFnJfg93tsATMX8rlKgUU4zT77_yHA_5RQxuebzgzQ9kmX8uw95l-z_XhGVx-Fs3sXPJMv7KkfHlgEC8TiWhKPl-VNZrGGA8PKQrP-Dukvi63F3ugtGDKG0dov9ApejU8HZmDwjVC_VNdrakV2Sl8NrBCDz7Nn9WTbN1n1T5qnVHUjvL5io1g26wgrcVaLqxUcxgjiOUCJ1-" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Title for Who It's For -->
+    <section class="py-12 bg-background text-center" id="who-its-for">
+      <div class="max-w-4xl mx-auto px-6">
+        <h2 class="text-5xl font-bold text-on-background mb-6 tracking-tight">Designed for real-world impact.</h2>
+        <p class="text-on-surface-variant text-xl leading-relaxed">We studied the daily chaos of 4 distinct user groups
+          to build an intelligence layer that actually solves their problems, rather than just adding another tool to
+          the stack.</p>
+      </div>
+    </section>
+
+    <!-- Persona 1: NGO -->
+    <section class="py-20 border-t border-outline-variant/30">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+          <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 flex items-center gap-2"><span
+              class="material-symbols-outlined text-base">diversity_1</span> Persona 1</span>
+          <h2 class="text-4xl font-bold text-on-background mb-4">NGOs &amp; Community Organizations</h2>
+          <p class="text-on-surface-variant text-lg max-w-3xl">Small non-profits, community groups, and social impact
+            organizations running on minimal staff and zero budget for tools.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- Pain Points -->
+          <div class="lg:col-span-7 space-y-6">
+            <h3 class="text-xl font-semibold mb-6 flex items-center gap-2 border-b border-outline-variant/50 pb-4"><span
+                class="material-symbols-outlined text-error">warning</span> The Daily Reality &amp; Problems</h3>
+
+            <div class="bg-surface-container rounded-xl p-6 border border-outline-variant">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Grant Writing Takes Days</h4>
+              <p class="text-on-surface-variant text-sm mb-4">They manually write 10-page applications from scratch
+                every time. Same information rewritten differently for every funder.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-primary bg-primary/5 p-3 rounded-lg border border-primary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span> Reads
+                  past work + drafts full application</div>
+                <div class="text-right whitespace-nowrap"><span class="line-through text-outline">3 days</span> → 30
+                  mins</div>
+              </div>
+            </div>
+
+            <div class="bg-surface-container rounded-xl p-6 border border-outline-variant">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Volunteer Scheduling is WhatsApp Chaos</h4>
+              <p class="text-on-surface-variant text-sm mb-4">50 volunteers sending availability over WhatsApp, email,
+                and forms. Coordinator manually matches shifts, full of errors.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-primary bg-primary/5 p-3 rounded-lg border border-primary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span> Reads
+                  all availability → optimal schedule</div>
+                <div class="text-right whitespace-nowrap"><span class="line-through text-outline">4 hrs</span> →
+                  automatic</div>
+              </div>
+            </div>
+
+            <div class="bg-surface-container rounded-xl p-6 border border-outline-variant">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Impact Reports &amp; Knowledge Loss</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Donors want quarterly reports compiled from scattered
+                PDFs. When a 2-year volunteer leaves, all their contacts and processes leave with them.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-primary bg-primary/5 p-3 rounded-lg border border-primary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span>
+                  Auto-synthesizes data + preserves knowledge</div>
+                <div class="text-right whitespace-nowrap"><span class="line-through text-outline">3 days</span> → 10
+                  mins</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Magic Moment -->
+          <div class="lg:col-span-5">
+            <div
+              class="bg-primary text-white rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden h-full shadow-xl shadow-primary/20">
+              <div
+                class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+              </div>
+              <span class="material-symbols-outlined text-5xl mb-6 text-tertiary-fixed-dim">auto_fix_high</span>
+              <h3 class="text-3xl font-bold mb-4">The Magic Moment</h3>
+              <p class="text-lg text-white/90 leading-relaxed italic mb-8">
+                "Upload mission statement PDF + last 3 months of work emails → Second Brain drafts a complete grant
+                application in 10 minutes. Priya submits it in 30. Gets the funding. Changes 500 lives."
+              </p>
+              <button
+                class="bg-white text-primary font-semibold py-3 px-6 rounded-lg self-start hover:bg-surface-container-lowest transition-colors shadow-sm">See
+                Grant Writer in Action</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Persona 2: IT -->
+    <section class="py-20 border-t border-outline-variant/30 bg-surface-container-lowest">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+          <span class="text-secondary font-bold tracking-wider uppercase text-sm mb-2 flex items-center gap-2"><span
+              class="material-symbols-outlined text-base">computer</span> Persona 2</span>
+          <h2 class="text-4xl font-bold text-on-background mb-4">Knowledge Workers &amp; IT Pros</h2>
+          <p class="text-on-surface-variant text-lg max-w-3xl">Software engineers, project managers, consultants —
+            people whose work lives inside emails, Slack, and documents.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- Magic Moment -->
+          <div class="lg:col-span-5 order-2 lg:order-1">
+            <div
+              class="bg-secondary text-white rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden h-full shadow-xl shadow-secondary/20">
+              <div
+                class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2">
+              </div>
+              <span class="material-symbols-outlined text-5xl mb-6 text-secondary-fixed">auto_fix_high</span>
+              <h3 class="text-3xl font-bold mb-4">The Magic Moment</h3>
+              <p class="text-lg text-white/90 leading-relaxed italic mb-8">
+                "Monday morning. Dashboard already shows: '3 pending decisions from last week, 2 follow-ups needed, this
+                project connects to these 4 documents.' Before you even open your inbox."
+              </p>
+              <button
+                class="bg-white text-secondary font-semibold py-3 px-6 rounded-lg self-start hover:bg-surface-container-lowest transition-colors shadow-sm">Explore
+                Dashboard</button>
+            </div>
+          </div>
+
+          <!-- Pain Points -->
+          <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+            <h3 class="text-xl font-semibold mb-6 flex items-center gap-2 border-b border-outline-variant/50 pb-4"><span
+                class="material-symbols-outlined text-error">warning</span> The Daily Reality &amp; Problems</h3>
+
+            <div class="bg-white rounded-xl p-6 border border-outline-variant shadow-sm">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Email Thread Hell &amp; Context Switching</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Finding a decision in a 200+ email thread takes 40
+                minutes. Jumping between Gmail, Slack, Notion, and Docs kills 23 minutes of focus every single time.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-secondary bg-secondary/5 p-3 rounded-lg border border-secondary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span>
+                  Surfaces what matters today in one dashboard</div>
+                <div class="text-right whitespace-nowrap">Saves <span class="font-bold">3.5 hrs/day</span></div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 border border-outline-variant shadow-sm">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Meeting Amnesia &amp; Information Silos</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Nobody remembers what was decided last Tuesday. The answer
+                to today's problem exists in a 6-month-old email nobody knows about.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-secondary bg-secondary/5 p-3 rounded-lg border border-secondary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span>
+                  Auto-links decisions + semantic search</div>
+                <div class="text-right whitespace-nowrap">Find anything in <span class="font-bold">10 secs</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Persona 3: Web Agency -->
+    <section class="py-20 border-t border-outline-variant/30">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+          <span class="text-tertiary font-bold tracking-wider uppercase text-sm mb-2 flex items-center gap-2"><span
+              class="material-symbols-outlined text-base">web</span> Persona 3</span>
+          <h2 class="text-4xl font-bold text-on-background mb-4">Webcraftzs - Web Agency Teams</h2>
+          <p class="text-on-surface-variant text-lg max-w-3xl">A web development agency managing multiple client
+            projects simultaneously with tight deadlines and distributed teams.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- Pain Points -->
+          <div class="lg:col-span-7 space-y-6">
+            <h3 class="text-xl font-semibold mb-6 flex items-center gap-2 border-b border-outline-variant/50 pb-4"><span
+                class="material-symbols-outlined text-error">warning</span> The Daily Reality &amp; Problems</h3>
+
+            <div class="bg-surface-container rounded-xl p-6 border border-outline-variant">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Client Brief Chaos &amp; Deadline Misses</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Client communicates via email, WhatsApp, Figma, and calls
+                simultaneously. Developer builds desktop-first because nobody wrote down "mobile-first".</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-tertiary bg-tertiary/5 p-3 rounded-lg border border-tertiary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span> One
+                  synthesized brief + auto action items</div>
+                <div class="text-right whitespace-nowrap">Zero confusion</div>
+              </div>
+            </div>
+
+            <div class="bg-surface-container rounded-xl p-6 border border-outline-variant">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Project Handover Takes Days</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Developer leaves mid-project. New person reads 300 emails
+                to understand context. Takes 3-4 days of zero productivity.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-tertiary bg-tertiary/5 p-3 rounded-lg border border-tertiary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span> Full
+                  project context summary generated</div>
+                <div class="text-right whitespace-nowrap"><span class="line-through text-outline">3 days</span> → 30
+                  secs</div>
+              </div>
+            </div>
+
+            <div class="bg-surface-container rounded-xl p-6 border border-outline-variant">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Proposal Writing is Slow</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Writing each proposal means digging through past projects
+                and pricing references manually. 4+ hours per proposal limits scaling.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-tertiary bg-tertiary/5 p-3 rounded-lg border border-tertiary/10">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span> AI
+                  drafts proposal from past project data</div>
+                <div class="text-right whitespace-nowrap"><span class="line-through text-outline">4 hrs</span> → 20 mins
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Magic Moment -->
+          <div class="lg:col-span-5">
+            <div
+              class="bg-tertiary text-white rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden h-full shadow-xl shadow-tertiary/20">
+              <div
+                class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+              </div>
+              <span class="material-symbols-outlined text-5xl mb-6 text-tertiary-fixed-dim">auto_fix_high</span>
+              <h3 class="text-3xl font-bold mb-4">The Magic Moment</h3>
+              <p class="text-lg text-white/90 leading-relaxed italic mb-8">
+                "New junior joins project Day 1. Feeds all emails and docs into Second Brain. Gets: 'Project summary,
+                client preferences, tech stack, pending decisions, deadline Friday.' Starts contributing immediately."
+              </p>
+              <button
+                class="bg-white text-tertiary font-semibold py-3 px-6 rounded-lg self-start hover:bg-surface-container-lowest transition-colors shadow-sm">Try
+                Project Sync</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Persona 4: Mentor -->
+    <section class="py-20 border-y border-outline-variant/30 bg-surface-container-lowest">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+          <span class="text-[#0086b3] font-bold tracking-wider uppercase text-sm mb-2 flex items-center gap-2"><span
+              class="material-symbols-outlined text-base">school</span> Persona 4</span>
+          <h2 class="text-4xl font-bold text-on-background mb-4">The Ascent Circle - Mentors &amp; Mentees</h2>
+          <p class="text-on-surface-variant text-lg max-w-3xl">A mentorship and community growth platform connecting
+            mentors and mentees across career stages.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <!-- Magic Moment -->
+          <div class="lg:col-span-5 order-2 lg:order-1">
+            <div
+              class="bg-[#00688b] text-white rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden h-full shadow-xl shadow-[#00688b]/20">
+              <div
+                class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2">
+              </div>
+              <span class="material-symbols-outlined text-5xl mb-6 text-[#adebeb]">auto_fix_high</span>
+              <h3 class="text-3xl font-bold mb-4">The Magic Moment</h3>
+              <p class="text-lg text-white/90 leading-relaxed italic mb-8">
+                "Mentor opens app before Rahul's session. Sees: 'Last session: Rahul struggling with resume. You
+                suggested LinkedIn update. He applied to 3 jobs. Follow up on responses.' Mentor looks deeply
+                attentive."
+              </p>
+              <button
+                class="bg-white text-[#00688b] font-semibold py-3 px-6 rounded-lg self-start hover:bg-surface-container-lowest transition-colors shadow-sm">See
+                Mentor Briefs</button>
+            </div>
+          </div>
+
+          <!-- Pain Points -->
+          <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+            <h3 class="text-xl font-semibold mb-6 flex items-center gap-2 border-b border-outline-variant/50 pb-4"><span
+                class="material-symbols-outlined text-error">warning</span> The Daily Reality &amp; Problems</h3>
+
+            <div class="bg-white rounded-xl p-6 border border-outline-variant shadow-sm">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Mentor Memory Doesn't Scale &amp; Prep Takes Too
+                Long</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Managing 15 mentees means forgetting goals. Good prep
+                takes 30+ minutes per person. Mentee feels ignored and disengages.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-[#0086b3] bg-[#e0ffff]/50 p-3 rounded-lg border border-[#adebeb]">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span> AI
+                  brief before every session</div>
+                <div class="text-right whitespace-nowrap"><span class="line-through text-outline">30 mins</span> → 30
+                  secs</div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 border border-outline-variant shadow-sm">
+              <h4 class="font-bold text-lg mb-2 text-on-background">Resources Get Lost &amp; Progress is Invisible</h4>
+              <p class="text-on-surface-variant text-sm mb-4">Resources shared via WhatsApp, emails, and notes are
+                scattered. Impossible to prove ROI of the mentorship program.</p>
+              <div
+                class="flex items-center justify-between text-sm font-medium text-[#0086b3] bg-[#e0ffff]/50 p-3 rounded-lg border border-[#adebeb]">
+                <div class="flex items-center gap-2"><span class="material-symbols-outlined">auto_awesome</span>
+                  Auto-indexed resources + progress timelines</div>
+                <div class="text-right whitespace-nowrap">Find instantly</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <!-- Footer (Shared Component Translation) -->
+  <footer class="w-full border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-slate-950 flat">
+    <div
+      class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-start gap-8 font-['Inter'] text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex flex-col gap-4">
+        <span class="text-base font-bold text-slate-900 dark:text-slate-50">Second Brain</span>
+        <p>© 2026 Knowledge Synthesizer. All rights reserved.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 w-full md:w-auto md:justify-end">
+        <div class="flex flex-col gap-2">
+          <a class="text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity"
+            href="#">Privacy Policy</a>
+          <a class="text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity"
+            href="#">Terms of Service</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <a class="text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity"
+            href="#">Security</a>
+          <a class="text-slate-500 dark:text-slate-400 hover:underline opacity-100 hover:opacity-80 transition-opacity"
+            href="#">Help Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

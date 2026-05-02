@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Search - Second Brain</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1c1b23",
+                        "tertiary": "#743300",
+                        "on-tertiary-fixed-variant": "#763300",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#321200",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#474554",
+                        "inverse-primary": "#c6bfff",
+                        "tertiary-fixed-dim": "#ffb68d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface": "#fcf8ff",
+                        "on-primary-fixed": "#150066",
+                        "surface-container": "#f0ecf8",
+                        "surface-container-highest": "#e5e0ed",
+                        "secondary-fixed-dim": "#bcc5e9",
+                        "primary-fixed-dim": "#c6bfff",
+                        "error-container": "#ffdad6",
+                        "secondary": "#545e7c",
+                        "on-primary-container": "#d7d2ff",
+                        "surface-tint": "#5746d5",
+                        "secondary-container": "#cfd9fd",
+                        "on-secondary-container": "#545e7d",
+                        "primary-container": "#5645d4",
+                        "tertiary-fixed": "#ffdbc9",
+                        "inverse-on-surface": "#f3effb",
+                        "surface-container-high": "#ebe6f2",
+                        "outline": "#787586",
+                        "background": "#fcf8ff",
+                        "on-surface": "#1c1b23",
+                        "inverse-surface": "#312f38",
+                        "primary": "#3d27bc",
+                        "surface-bright": "#fcf8ff",
+                        "secondary-fixed": "#dae2ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffcdb1",
+                        "on-primary-fixed-variant": "#3e28bd",
+                        "surface-dim": "#dcd8e4",
+                        "surface-variant": "#e5e0ed",
+                        "on-secondary-fixed": "#101a36",
+                        "tertiary-container": "#994500",
+                        "outline-variant": "#c8c4d7",
+                        "surface-container-low": "#f6f2fe",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#e4dfff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "hero": "120px",
+                        "md": "16px",
+                        "lg": "20px",
+                        "section": "64px",
+                        "xl": "24px",
+                        "sm": "12px",
+                        "xxl": "32px"
+                    },
+                    "fontFamily": {
+                        "hero": ["Inter"],
+                        "h1": ["Inter"],
+                        "button": ["Inter"],
+                        "h2": ["Inter"],
+                        "h3": ["Inter"],
+                        "body": ["Inter"]
+                    },
+                    "fontSize": {
+                        "hero": ["80px", { "lineHeight": "1.1", "letterSpacing": "-2px", "fontWeight": "600" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+                        "button": ["14px", { "lineHeight": "1", "letterSpacing": "0px", "fontWeight": "500" }],
+                        "h2": ["36px", { "lineHeight": "1.3", "letterSpacing": "-0.5px", "fontWeight": "600" }],
+                        "h3": ["28px", { "lineHeight": "1.4", "letterSpacing": "0px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "1.6", "letterSpacing": "0px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col gap-1 py-8 bg-[#fafaf9] dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 fixed left-0 top-0 h-screen w-[240px] z-40 transition-all duration-200 ease-in-out">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-semibold text-slate-800 dark:text-slate-100 font-h1 text-h1" style="font-size: 1.125rem; line-height: 1.75rem; letter-spacing: 0;">Second Brain</h1>
+<p class="font-body text-body text-slate-500 text-sm">Knowledge Synthesizer</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">home</span> Home
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 bg-white dark:bg-slate-800 border-l-[3px] border-[#5645d4] text-[#5645d4] font-semibold font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">psychology</span> Brain Map
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">database</span> Sources
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">auto_awesome</span> Synthesis
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 border-l-[3px] border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50 font-['Inter'] text-sm mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+        </a>
+</nav>
+<!-- Main Content Canvas -->
+<div class="flex-1 md:ml-[240px] flex flex-col min-h-screen">
+<!-- TopNavBar (Mobile mainly, or supplemental on desktop) -->
+<header class="md:hidden flex justify-between items-center px-6 py-3 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 docked full-width top-0 sticky z-50">
+<div class="text-xl font-bold text-slate-900 dark:text-slate-50 font-h1 text-h1" style="font-size: 1.25rem;">Second Brain</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 hover:text-slate-900 cursor-pointer transition-colors">notifications</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-slate-900 cursor-pointer transition-colors">account_circle</span>
+</div>
+</header>
+<!-- Search Hero Section -->
+<section class="bg-[#f6f5f4] pt-section pb-xl px-lg md:px-section border-b border-outline-variant/30 flex flex-col items-center text-center">
+<h2 class="font-h2 text-h2 text-on-surface mb-md">Deep Search</h2>
+<div class="w-full max-w-3xl relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant text-2xl">search</span>
+<input class="w-full pl-section pr-md py-lg bg-surface-container-lowest border border-outline-variant rounded-xl font-body text-body text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent shadow-sm" placeholder="What did the donor say about the Q3 timeline?" type="text" value="What did the donor say about the Q3 timeline?"/>
+<button class="absolute right-xs top-1/2 -translate-y-1/2 bg-primary-container text-on-primary font-button text-button px-md py-sm rounded-lg hover:bg-primary transition-colors">
+                    Search
+                </button>
+</div>
+<div class="flex flex-wrap justify-center gap-sm mt-lg">
+<button class="flex items-center gap-xs px-md py-sm rounded-full bg-surface-container border border-outline-variant font-button text-button text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">mail</span> Emails
+                </button>
+<button class="flex items-center gap-xs px-md py-sm rounded-full bg-surface-container border border-outline-variant font-button text-button text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span> PDFs
+                </button>
+<button class="flex items-center gap-xs px-md py-sm rounded-full bg-primary-container/10 border border-primary-container/30 font-button text-button text-primary-container hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-sm">tag</span> Q3 Strategy
+                    <span class="material-symbols-outlined text-xs ml-xs">close</span>
+</button>
+<button class="flex items-center gap-xs px-md py-sm rounded-full bg-surface-container border border-outline-variant font-button text-button text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">tune</span> Filters
+                </button>
+</div>
+</section>
+<!-- Main Results Area -->
+<main class="flex-1 flex flex-col lg:flex-row p-lg md:p-xl gap-xl max-w-[1400px] mx-auto w-full">
+<!-- Left: Search Results -->
+<div class="flex-1 flex flex-col gap-md">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="font-h3 text-h3 text-on-surface text-xl">Top Synthesized Results</h3>
+<span class="font-body text-body text-on-surface-variant text-sm">Found 14 sources in 1.2s</span>
+</div>
+<!-- Result Card 1: Gmail -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col gap-sm hover:border-outline transition-colors cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container rounded-l-xl"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-[#ea4335]/10 flex items-center justify-center text-[#ea4335]">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-base text-on-surface">Re: Q3 Funding Timeline Update</h4>
+<p class="font-body text-body text-xs text-on-surface-variant">From: Sarah Jenkins (Donor) • Oct 12, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-xs bg-surface-container px-xs py-[2px] rounded-DEFAULT">
+<span class="material-symbols-outlined text-sm text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-button text-button text-xs text-on-surface">98% Match</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm mt-xs border border-outline-variant/30">
+<div class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-primary-container text-sm mt-[2px]">auto_awesome</span>
+<p class="font-body text-body text-sm text-on-surface">
+<span class="font-medium text-on-surface">AI Synthesis:</span> Sarah confirmed they are comfortable with the <span class="bg-primary-container/20 text-primary-container px-1 rounded">November 15th milestone</span> for the Q3 disbursement, provided the preliminary impact report is delivered by end of October.
+                            </p>
+</div>
+</div>
+<p class="font-body text-body text-sm text-on-surface-variant mt-xs line-clamp-2">
+                        "...As we discussed in yesterday's sync, our board is aligned with your revised <span class="bg-primary-container/20 text-primary-container px-1 rounded">Q3 timeline</span>. We are ready to proceed with the next tranche on <span class="bg-primary-container/20 text-primary-container px-1 rounded">November 15th</span>, contingent upon receiving the drafted impact metrics..."
+                    </p>
+</div>
+<!-- Result Card 2: PDF -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col gap-sm hover:border-outline transition-colors cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-surface-dim rounded-l-xl group-hover:bg-primary-container/50 transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-[#f40f02]/10 flex items-center justify-center text-[#f40f02]">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-base text-on-surface">Jenkins_Foundation_MOU_Draft_v2.pdf</h4>
+<p class="font-body text-body text-xs text-on-surface-variant">Shared Drive • Legal Folder • Sep 28, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-xs bg-surface-container px-xs py-[2px] rounded-DEFAULT">
+<span class="font-button text-button text-xs text-on-surface">85% Match</span>
+</div>
+</div>
+<p class="font-body text-body text-sm text-on-surface-variant mt-xs line-clamp-2 pl-xl">
+                        "...Section 4.2 Disbursement Schedule: The Grantor agrees to release the <span class="bg-primary-container/20 text-primary-container px-1 rounded">Q3 funds</span> no later than mid-November, subject to the conditions outlined in Addendum B regarding timeline expectations..."
+                    </p>
+</div>
+<!-- Result Card 3: Slack -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col gap-sm hover:border-outline transition-colors cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-surface-dim rounded-l-xl group-hover:bg-primary-container/50 transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-[#4a154b]/10 flex items-center justify-center text-[#4a154b]">
+<span class="material-symbols-outlined text-lg">tag</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-base text-on-surface">#proj-jenkins-grant</h4>
+<p class="font-body text-body text-xs text-on-surface-variant">Slack • @mike_t • Oct 10, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-xs bg-surface-container px-xs py-[2px] rounded-DEFAULT">
+<span class="font-button text-button text-xs text-on-surface">72% Match</span>
+</div>
+</div>
+<p class="font-body text-body text-sm text-on-surface-variant mt-xs line-clamp-2 pl-xl">
+                        "Just got off the phone with Sarah's team. They're okay pushing the <span class="bg-primary-container/20 text-primary-container px-1 rounded">Q3 deliverables</span> out a few weeks as long as the reporting stays on schedule. I'll draft an email to confirm the exact dates."
+                    </p>
+</div>
+</div>
+<!-- Right: Contextual Sidebar -->
+<aside class="w-full lg:w-[320px] flex flex-col gap-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<h4 class="font-h3 text-h3 text-sm text-on-surface-variant flex items-center gap-xs mb-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">explore</span> Try Asking
+                    </h4>
+<ul class="flex flex-col gap-xs">
+<li>
+<button class="w-full text-left font-body text-body text-sm text-on-surface hover:bg-surface-container px-sm py-sm rounded-lg transition-colors flex items-start gap-sm group">
+<span class="material-symbols-outlined text-on-surface-variant text-base group-hover:text-primary-container transition-colors mt-[2px]">chat_bubble</span>
+<span>Summarize the impact metrics required for the Q3 disbursement.</span>
+</button>
+</li>
+<li>
+<button class="w-full text-left font-body text-body text-sm text-on-surface hover:bg-surface-container px-sm py-sm rounded-lg transition-colors flex items-start gap-sm group">
+<span class="material-symbols-outlined text-on-surface-variant text-base group-hover:text-primary-container transition-colors mt-[2px]">history</span>
+<span>Show me the timeline of interactions with Sarah Jenkins this quarter.</span>
+</button>
+</li>
+<li>
+<button class="w-full text-left font-body text-body text-sm text-on-surface hover:bg-surface-container px-sm py-sm rounded-lg transition-colors flex items-start gap-sm group">
+<span class="material-symbols-outlined text-on-surface-variant text-base group-hover:text-primary-container transition-colors mt-[2px]">person</span>
+<span>Who else is involved in the Jenkins Foundation grant approval?</span>
+</button>
+</li>
+</ul>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<h4 class="font-h3 text-h3 text-sm text-on-surface-variant flex items-center gap-xs mb-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">device_hub</span> Knowledge Graph
+                    </h4>
+<div class="h-[200px] bg-surface-container-low rounded-lg border border-outline-variant/50 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#5645d4 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-sm z-10 relative">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="absolute w-full h-[1px] bg-primary-container/30 rotate-45 z-0"></div>
+<div class="absolute w-full h-[1px] bg-primary-container/30 -rotate-12 z-0"></div>
+<div class="absolute top-6 left-6 w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center text-on-surface-variant z-10">
+<span class="material-symbols-outlined text-sm">mail</span>
+</div>
+<div class="absolute bottom-8 right-8 w-10 h-10 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center text-on-surface-variant z-10">
+<span class="material-symbols-outlined text-base">description</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</body></html>
