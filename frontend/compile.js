@@ -92,7 +92,7 @@ function attachThemeToggle() {
   if (!toggleBtn) {
     toggleBtn = document.createElement('button');
     toggleBtn.id = 'theme-toggle-btn';
-    toggleBtn.className = 'fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg bg-surface-container-high border border-outline-variant text-on-surface hover:bg-surface-container-highest transition-colors flex items-center justify-center';
+    toggleBtn.className = 'text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-variant/50 focus:outline-none';
     toggleBtn.innerHTML = '<span class="material-symbols-outlined">light_mode</span>';
     
     toggleBtn.addEventListener('click', () => {
@@ -107,7 +107,28 @@ function attachThemeToggle() {
         toggleBtn.innerHTML = '<span class="material-symbols-outlined">light_mode</span>';
       }
     });
+  }
+  
+  // Attach to navbar
+  const header = document.querySelector('header');
+  if (header) {
+    // Try to find the right action group (usually has gap-4)
+    let targetContainer = header.querySelector('.gap-4');
     
+    // Fallback: get the last flex child of header
+    if (!targetContainer) {
+      const headerFlexDivs = header.querySelectorAll(':scope > div.flex');
+      if (headerFlexDivs.length > 0) {
+        targetContainer = headerFlexDivs[headerFlexDivs.length - 1];
+      }
+    }
+    
+    if (targetContainer && !targetContainer.contains(toggleBtn)) {
+      targetContainer.insertBefore(toggleBtn, targetContainer.firstChild);
+    }
+  } else {
+    // Fallback floating button
+    toggleBtn.className = 'fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg bg-surface-container-high border border-outline-variant text-on-surface hover:bg-surface-container-highest transition-colors flex items-center justify-center';
     document.body.appendChild(toggleBtn);
   }
   
