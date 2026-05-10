@@ -1,17 +1,17 @@
+from datetime import date, timedelta
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
-from typing import List
-from datetime import date, timedelta
-import json
 
-from database import get_session
-from models import Flashcard, Document
 from ai_engine import generate_flashcards
+from database import get_session
+from deps import get_current_user_id
+from models import Document, Flashcard
 
 router = APIRouter()
 
 @router.get("/flashcards")
-def get_due_flashcards(user_id: int = 1, session: Session = Depends(get_session)):
+def get_due_flashcards(user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
     today = date.today()
     cards = session.exec(select(Flashcard).where(
         Flashcard.user_id == user_id, 
@@ -20,7 +20,7 @@ def get_due_flashcards(user_id: int = 1, session: Session = Depends(get_session)
     return cards
 
 @router.get("/flashcards/all")
-def get_all_flashcards(user_id: int = 1, session: Session = Depends(get_session)):
+def get_all_flashcards(user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
     cards = session.exec(select(Flashcard).where(Flashcard.user_id == user_id)).all()
     return cards
 
@@ -48,7 +48,7 @@ def auto_generate_flashcards(document_id: int, deck_name: str, user_id: int = 1,
     return created
 
 @router.put("/flashcards/{card_id}/review")
-def review_flashcard(card_id: int, quality: int, user_id: int = 1, session: Session = Depends(get_session)):
+def review_flashcard(card_id: int, quality: int, user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
     # quality: 0=Again, 1=Hard, 2=Good, 3=Easy
     card = session.get(Flashcard, card_id)
     if not card or card.user_id != user_id:

@@ -33,6 +33,9 @@ class Source(SQLModel, table=True):
     source_type: str  # gmail | drive | pdf | slack | whatsapp | manual
     name: str
     connection_status: str = "connected"  # connected | syncing | paused | error
+    provider_account: Optional[str] = None  # email / phone / workspace identifier
+    metadata_json: Optional[str] = None  # provider-specific JSON metadata
+    last_error: Optional[str] = None
     last_synced_at: Optional[datetime] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
@@ -49,6 +52,10 @@ class Document(SQLModel, table=True):
     summary: Optional[str] = None
     action_items_json: Optional[str] = None  # JSON list of strings
     entities_json: Optional[str] = None  # JSON list of dicts
+    provider_item_id: Optional[str] = None  # provider-side stable id (e.g. Gmail message id)
+    provider_thread_id: Optional[str] = None
+    external_url: Optional[str] = None
+    provider_payload_json: Optional[str] = None  # raw provider JSON payload
     ingested_at: datetime = Field(default_factory=datetime.utcnow)
 
 
@@ -154,3 +161,35 @@ class Project(SQLModel, table=True):
     status: str = "active"  # active | completed | on_hold
     deadline: Optional[date] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class IntegrationConnection(SQLModel, table=True):
+    __tablename__ = "integration_connections"
+    connection_id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key="users.user_id", index=True)
+    provider: str = Field(index=True)  # google | whatsapp
+    provider_account_id: Optional[str] = None
+    provider_account_label: Optional[str] = None
+    access_token_encrypted: Optional[str] = None
+    refresh_token_encrypted: Optional[str] = None
+    token_expires_at: Optional[datetime] = None
+    scopes: Optional[str] = None  # space-delimited scope string
+    status: str = "connected"  # connected | paused | error | disconnected
+    last_sync_cursor: Optional[str] = None  # Gmail historyId / Calendar syncToken
+    webhook_resource_id: Optional[str] = None
+    webhook_resource_data: Optional[str] = None
+    last_error: Optional[str] = None
+    metadata_json: Optional[str] = None
+    connected_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class IntegrationSyncLog(SQLModel, table=True):
+    __tablename__ = "integration_sync_logs"
+    log_id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key="users.user_id", index=True)
+    provider: str = Field(index=True)  # gmail | calendar | whatsapp
+    status: str = "success"  # success | warning | error | info
+    message: str
+    details_json: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow, index=True)

@@ -1,8 +1,8 @@
 """
 Second Brain — AI Engine (Groq Cloud + RAG Pipeline)
 Provider  : Groq Cloud  (https://console.groq.com)
-Default   : llama3-70b-8192   — free, fast, strong reasoning
-Fallback  : llama3-8b-8192    — ultra-fast, still capable
+Default   : llama-3.3-70b-versatile — current production default on Groq
+Fallback  : llama-3.1-8b-instant — fast when the primary is unavailable
 """
 import os
 import json
@@ -12,7 +12,7 @@ from groq import Groq
 
 # ── Config ──────────────────────────────────────────────────────────────────
 GROQ_API_KEY   = os.getenv("GROQ_API_KEY", "")
-GROQ_MODEL     = os.getenv("GROQ_MODEL", "llama3-70b-8192")   # or mixtral-8x7b-32768
+GROQ_MODEL     = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 GROQ_MAX_TOKENS = int(os.getenv("GROQ_MAX_TOKENS", "1024"))
 
 _client: Optional[Groq] = None

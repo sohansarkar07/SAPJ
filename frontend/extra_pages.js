@@ -37,10 +37,10 @@ function buildSidebar(active) {
     <div class="flex-1 flex flex-col gap-0.5 pb-4">${navHtml}</div>
     <div class="px-4 py-4 border-t border-slate-200 dark:border-slate-800">
       <div class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
-        <div class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center font-bold text-sm text-on-primary-container">PS</div>
+        <div id="sb-user-avatar" class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center font-bold text-sm text-on-primary-container">—</div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">Priya Sharma</p>
-          <p class="text-xs text-slate-500">NGO Pro</p>
+          <p id="sb-user-name" class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">Loading…</p>
+          <p id="sb-user-role" class="text-xs text-slate-500">…</p>
         </div>
         <button id="theme-toggle-btn-sb" onclick="toggleDarkMode()" class="p-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition-colors">
           <span class="material-symbols-outlined text-[18px]">dark_mode</span>
@@ -156,19 +156,19 @@ PAGE_DATA['volunteer'] = {
           <!-- Stats row -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div class="text-3xl font-bold text-primary" id="vol-count">48</div>
+              <div class="text-3xl font-bold text-primary" id="vol-count">—</div>
               <div class="text-xs text-slate-500 mt-1 font-medium">Active Volunteers</div>
             </div>
             <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div class="text-3xl font-bold text-green-600" id="conf-count">3</div>
+              <div class="text-3xl font-bold text-green-600" id="conf-count">—</div>
               <div class="text-xs text-slate-500 mt-1 font-medium">Shifts Confirmed</div>
             </div>
             <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div class="text-3xl font-bold text-yellow-600" id="pend-count">1</div>
+              <div class="text-3xl font-bold text-yellow-600" id="pend-count">—</div>
               <div class="text-xs text-slate-500 mt-1 font-medium">Pending Confirm</div>
             </div>
             <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div class="text-3xl font-bold text-red-500" id="gap-count">2</div>
+              <div class="text-3xl font-bold text-red-500" id="gap-count">—</div>
               <div class="text-xs text-slate-500 mt-1 font-medium">Gaps / Dropouts</div>
             </div>
           </div>

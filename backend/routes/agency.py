@@ -1,12 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlmodel import Session, select
-from typing import List
-import json
 from pydantic import BaseModel
+from sqlmodel import Session, select
 
-from database import get_session
-from models import User, Project, Document
 from ai_engine import generate_project_brief
+from database import get_session
+from deps import get_current_user_id
+from models import Document, Project, User
 
 router = APIRouter()
 
@@ -16,7 +15,7 @@ class ProjectRequest(BaseModel):
     tech_stack: str
 
 @router.get("/projects")
-def list_projects(user_id: int = 1, session: Session = Depends(get_session)):
+def list_projects(user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
     user = session.get(User, user_id)
     if not user or not user.organization_id:
         return []
@@ -24,7 +23,7 @@ def list_projects(user_id: int = 1, session: Session = Depends(get_session)):
     return projects
 
 @router.post("/projects")
-def add_project(req: ProjectRequest, user_id: int = 1, session: Session = Depends(get_session)):
+def add_project(req: ProjectRequest, user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
     user = session.get(User, user_id)
     if not user or not user.organization_id:
         raise HTTPException(status_code=400, detail="User not part of an org")
@@ -41,9 +40,10 @@ def add_project(req: ProjectRequest, user_id: int = 1, session: Session = Depend
     return project
 
 @router.get("/projects/{project_id}/sync")
-def sync_project_brief(project_id: int, user_id: int = 1, session: Session = Depends(get_session)):
+def sync_project_brief(project_id: int, user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
+    user = session.get(User, user_id)
     project = session.get(Project, project_id)
-    if not project:
+    if not project or not user or not user.organization_id or project.org_id != user.organization_id:
         raise HTTPException(status_code=404, detail="Project not found")
         
     # Find docs related to this project

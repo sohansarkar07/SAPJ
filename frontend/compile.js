@@ -235,11 +235,23 @@ headContent = headContent.replace(
   '<title>Second Brain — Knowledge Synthesizer</title>'
 );
 
+// API base for SPA (same pattern as hand-maintained index.html)
+if (!headContent.includes('name="second-brain-api"')) {
+  headContent = headContent.replace(
+    '<meta content="width=device-width, initial-scale=1.0" name="viewport" />',
+    `<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="second-brain-api" content="http://127.0.0.1:8000" />`
+  );
+}
+
 const indexHtml = `<!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
 ${headContent}
 <body>
   <script src="app.js"><\/script>
+  <script src="extra_pages.js"><\/script>
+  <script src="features.js"><\/script>
+  <script src="features2.js"><\/script>
 </body>
 </html>
 `;

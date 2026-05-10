@@ -5,7 +5,7 @@
 // 3. IMPACT REPORTS
 // ═══════════════════════════════════════
 async function loadImpact() {
-  const data = await api('/impact?user_id=1');
+  const data = await api('/impact');
   const el = document.getElementById('impact-list');
   if (!el) return;
   if (!data || !data.length) {
@@ -50,7 +50,7 @@ window.generateImpactReport = async function() {
     <span class="material-symbols-outlined text-5xl text-primary animate-spin">progress_activity</span>
     <p class="text-sm text-slate-500 font-medium">Synthesizing data from your documents...</p>
   </div>`;
-  const res = await api('/impact/generate?user_id=1',{method:'POST',body:JSON.stringify({period})});
+  const res = await api('/impact/generate',{method:'POST',body:JSON.stringify({period})});
   btn.innerHTML='<span class="material-symbols-outlined text-[16px]">auto_awesome</span> Generate'; btn.disabled=false;
   if(res){toast('Impact report generated!');loadImpact();}else{loadImpact();}
 };
@@ -59,7 +59,7 @@ window.generateImpactReport = async function() {
 // 4. MENTEES
 // ═══════════════════════════════════════
 async function loadMentees() {
-  const data = await api('/mentees?user_id=3');
+  const data = await api('/mentees');
   const el = document.getElementById('mentee-list');
   if (!el || !data) return;
   el.innerHTML = data.map((m,i) => `
@@ -82,7 +82,7 @@ window.showMentee = async function(id, el) {
 
   const det = document.getElementById('mentee-detail');
   det.innerHTML = `<div class="flex items-center justify-center h-full"><span class="material-symbols-outlined text-4xl text-primary animate-spin">progress_activity</span></div>`;
-  const data = await api(`/mentees/${id}/brief?user_id=3`);
+  const data = await api(`/mentees/${id}/brief`);
   if(!data){det.innerHTML='<p class="p-8 text-slate-400">Failed to load</p>';return;}
   const m = data.mentee;
   const notes = data.recent_notes || [];
@@ -116,7 +116,7 @@ window.addMenteePrompt = function() { toast('Feature: Add mentee form (coming so
 // 5. PROJECTS
 // ═══════════════════════════════════════
 async function loadProjects() {
-  const data = await api('/projects?user_id=2');
+  const data = await api('/projects');
   const el = document.getElementById('project-grid');
   if (!el) return;
   if (!data || !data.length) { el.innerHTML = '<p class="text-slate-400 text-sm col-span-3 text-center py-12">No projects yet</p>'; return; }
@@ -142,7 +142,7 @@ async function loadProjects() {
 
 window.syncProject = async function(id) {
   toast('Syncing project communications...');
-  const res = await api(`/projects/${id}/sync?user_id=2`);
+  const res = await api(`/projects/${id}/sync`);
   if(res) { toast('Project brief updated!'); loadProjects(); }
 };
 
@@ -152,12 +152,12 @@ window.addProjectPrompt = function() { toast('Feature: Add project form (coming 
 // 6. FLASHCARDS
 // ═══════════════════════════════════════
 async function loadFlashcards() {
-  const data = await api('/flashcards?user_id=1');
+  const data = await api('/flashcards');
   const el = document.getElementById('fc-container');
   if (!el) return;
   if (!data || !data.length) {
     // Try all cards
-    const all = await api('/flashcards/all?user_id=1');
+    const all = await api('/flashcards/all');
     el.innerHTML = `<div class="text-center space-y-4">
       <span class="material-symbols-outlined text-6xl text-green-500">check_circle</span>
       <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200">You're all caught up!</h2>
@@ -193,6 +193,6 @@ async function loadFlashcards() {
 }
 
 window.reviewCard = async function(id, q) {
-  await api(`/flashcards/${id}/review?user_id=1&quality=${q}`, {method:'PUT'});
+  await api(`/flashcards/${id}/review?quality=${q}`, {method:'PUT'});
   loadFlashcards();
 };
