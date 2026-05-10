@@ -1,209 +1,143 @@
-import json
-import secrets
-from datetime import datetime
-from typing import Any
-
-from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request
+import os
+import httpx
+from typing import Optional
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import RedirectResponse
-from pydantic import BaseModel
 from sqlmodel import Session, select
-
-import config
 from database import get_session
-from deps import get_current_user_id
-from models import IntegrationConnection, IntegrationSyncLog, Source
-from services.calendar_sync import sync_calendar
-from services.gmail_sync import sync_gmail
-from services.google_oauth import build_google_consent_url, exchange_code_for_tokens, fetch_google_userinfo
-from services.security import encrypt_text, verify_whatsapp_signature
-from services.whatsapp_webhook import ingest_whatsapp_payload
+from models import Source
 
-router = APIRouter(prefix="/integrations")
+router = APIRouter()
 
-_oauth_state_store: dict[str, int] = {}
+# Environment variables for OAuth
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:55394")
+BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
 
-
-class SyncNowRequest(BaseModel):
-    provider: str
+# The redirect URI registered in Google Cloud Console
+GOOGLE_REDIRECT_URI = f"{BACKEND_URL}/api/integrations/google/callback"
 
 
-class DisconnectRequest(BaseModel):
-    provider: str
+@router.post("/{provider}/connect")
+def connect_integration(provider: str, user_id: int = 1):
+    """
+    Initiates the OAuth connection flow.
+    Returns the URL to redirect the user to.
+    """
+    provider = provider.lower()
+    
+    if provider == "google":
+        if not GOOGLE_CLIENT_ID:
+            raise HTTPException(status_code=500, detail="Google Client ID not configured on backend.")
+            
+        # Standard Google OAuth2 Authorization URL
+        auth_url = (
+            "https://accounts.google.com/o/oauth2/v2/auth"
+            f"?client_id={GOOGLE_CLIENT_ID}"
+            f"&redirect_uri={GOOGLE_REDIRECT_URI}"
+            "&response_type=code"
+            "&scope=email profile https://www.googleapis.com/auth/drive.readonly"
+            "&access_type=offline"
+            "&prompt=consent"
+        )
+        return {"redirect_url": auth_url}
+        
+    elif provider in ["slack", "notion", "whatsapp", "calendar"]:
+        # For testing other providers without real OAuth setup,
+        # we will do a mock success redirect back to frontend.
+        return {"redirect_url": f"{FRONTEND_URL}/?oauth_callback=true&provider={provider}"}
 
-
-def _upsert_source(session: Session, user_id: int, source_type: str, name: str, account_label: str | None) -> Source:
-    source = session.exec(
-        select(Source).where(Source.user_id == user_id, Source.source_type == source_type)
-    ).first()
-    if not source:
-        source = Source(user_id=user_id, source_type=source_type, name=name)
-    source.connection_status = "connected"
-    source.provider_account = account_label
-    source.last_error = None
-    source.last_synced_at = datetime.utcnow()
-    session.add(source)
-    session.flush()
-    return source
-
-
-@router.get("/status")
-def integration_status(user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
-    sources = session.exec(select(Source).where(Source.user_id == user_id)).all()
-    logs = session.exec(
-        select(IntegrationSyncLog).where(IntegrationSyncLog.user_id == user_id).order_by(IntegrationSyncLog.created_at.desc()).limit(25)
-    ).all()
-    conns = session.exec(
-        select(IntegrationConnection).where(IntegrationConnection.user_id == user_id)
-    ).all()
-    return {
-        "sources": sources,
-        "connections": conns,
-        "logs": logs,
-        "providers": {
-            "gmail": any(s.source_type == "gmail" and s.connection_status == "connected" for s in sources),
-            "calendar": any(s.source_type == "calendar" and s.connection_status == "connected" for s in sources),
-            "whatsapp": any(s.source_type == "whatsapp" and s.connection_status == "connected" for s in sources),
-        },
-    }
-
-
-@router.get("/google/connect")
-def google_connect(user_id: int = Depends(get_current_user_id)):
-    if not config.GOOGLE_CLIENT_ID or not config.GOOGLE_CLIENT_SECRET:
-        raise HTTPException(status_code=400, detail="Google OAuth is not configured")
-    state = secrets.token_urlsafe(24)
-    _oauth_state_store[state] = user_id
-    return {"auth_url": build_google_consent_url(state)}
+    raise HTTPException(status_code=400, detail=f"Unsupported provider: {provider}")
 
 
 @router.get("/google/callback")
-def google_callback(code: str, state: str, session: Session = Depends(get_session)):
-    user_id = _oauth_state_store.pop(state, None)
-    if not user_id:
-        raise HTTPException(status_code=400, detail="Invalid or expired OAuth state")
+async def google_oauth_callback(code: str, error: Optional[str] = None, user_id: int = 1, session: Session = Depends(get_session)):
+    """
+    Handles the redirect back from Google.
+    Exchanges the authorization code for tokens and updates the database.
+    Redirects to the frontend callback page.
+    """
+    if error:
+        # If the user cancelled the login
+        return RedirectResponse(url=f"{FRONTEND_URL}/?oauth_error={error}")
+        
+    if not code:
+        return RedirectResponse(url=f"{FRONTEND_URL}/?oauth_error=no_code")
 
-    token_data = exchange_code_for_tokens(code)
-    access_token = token_data.get("access_token")
-    refresh_token = token_data.get("refresh_token")
-    if not access_token:
-        raise HTTPException(status_code=400, detail="Google token exchange failed")
-
-    profile = fetch_google_userinfo(access_token)
-    email = profile.get("email")
-    sub = profile.get("sub")
-
-    conn = session.exec(
-        select(IntegrationConnection).where(
-            IntegrationConnection.user_id == user_id,
-            IntegrationConnection.provider == "google",
-        )
-    ).first()
-    if not conn:
-        conn = IntegrationConnection(user_id=user_id, provider="google")
-    conn.provider_account_id = sub
-    conn.provider_account_label = email
-    conn.access_token_encrypted = encrypt_text(access_token)
-    if refresh_token:
-        conn.refresh_token_encrypted = encrypt_text(refresh_token)
-    conn.token_expires_at = token_data.get("expires_at")
-    conn.scopes = token_data.get("scope", config.GOOGLE_OAUTH_SCOPES)
-    conn.status = "connected"
-    conn.last_error = None
-    conn.updated_at = datetime.utcnow()
-    session.add(conn)
-
-    _upsert_source(session, user_id, "gmail", "Gmail", email)
-    _upsert_source(session, user_id, "calendar", "Google Calendar", email)
-
-    session.add(
-        IntegrationSyncLog(
+    # Exchange code for token
+    token_url = "https://oauth2.googleapis.com/token"
+    payload = {
+        "client_id": GOOGLE_CLIENT_ID,
+        "client_secret": GOOGLE_CLIENT_SECRET,
+        "code": code,
+        "grant_type": "authorization_code",
+        "redirect_uri": GOOGLE_REDIRECT_URI,
+    }
+    
+    async with httpx.AsyncClient() as client:
+        response = await client.post(token_url, data=payload)
+        token_data = response.json()
+        
+    if "error" in token_data:
+        err_msg = token_data.get("error_description", token_data.get("error"))
+        return RedirectResponse(url=f"{FRONTEND_URL}/?oauth_error={err_msg}")
+        
+    # We successfully got the tokens!
+    # access_token = token_data.get("access_token")
+    # refresh_token = token_data.get("refresh_token")
+    # (In a full implementation, you would encrypt and store these in the database)
+    
+    # Update or create the Source record in the database
+    statement = select(Source).where(Source.user_id == user_id, Source.source_type == "google")
+    source = session.exec(statement).first()
+    
+    if source:
+        source.connection_status = "connected"
+    else:
+        source = Source(
             user_id=user_id,
-            provider="google",
-            status="success",
-            message=f"Google connected for {email or 'account'}.",
-            details_json=json.dumps({"email": email}),
+            source_type="google",
+            name="Google Integration",
+            connection_status="connected"
         )
-    )
+        session.add(source)
+        
     session.commit()
-    return RedirectResponse(url=f"{config.FRONTEND_BASE_URL}/index.html")
+    
+    # Redirect back to the frontend SPA's callback handler
+    return RedirectResponse(url=f"{FRONTEND_URL}/?oauth_callback=true")
 
 
-@router.post("/sync-now")
-def sync_now(body: SyncNowRequest, user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
-    provider = body.provider.strip().lower()
-    try:
-        if provider == "gmail":
-            return {"provider": "gmail", **sync_gmail(session, user_id)}
-        if provider == "calendar":
-            return {"provider": "calendar", **sync_calendar(session, user_id)}
-        if provider == "google":
-            g = sync_gmail(session, user_id)
-            c = sync_calendar(session, user_id)
-            return {"provider": "google", "gmail": g, "calendar": c}
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc))
-    except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Sync failed: {str(exc)}")
-    raise HTTPException(status_code=400, detail="Supported providers: gmail, calendar, google")
+@router.get("/status")
+def get_integration_status(user_id: int = 1, session: Session = Depends(get_session)):
+    """
+    Returns a dictionary of provider statuses for the current user.
+    """
+    statement = select(Source).where(Source.user_id == user_id)
+    sources = session.exec(statement).all()
+    
+    status_map = {}
+    for src in sources:
+        # Mapping generic "google" to our providers if needed, 
+        # but the frontend expects 'google', 'slack', etc.
+        status_map[src.source_type] = src.connection_status
+        
+    return status_map
 
 
-@router.post("/disconnect")
-def disconnect(body: DisconnectRequest, user_id: int = Depends(get_current_user_id), session: Session = Depends(get_session)):
-    provider = body.provider.strip().lower()
-    if provider == "google":
-        conn = session.exec(
-            select(IntegrationConnection).where(
-                IntegrationConnection.user_id == user_id,
-                IntegrationConnection.provider == "google",
-            )
-        ).first()
-        if conn:
-            conn.status = "disconnected"
-            conn.last_error = "Disconnected by user"
-            session.add(conn)
-        for source_type in ("gmail", "calendar"):
-            source = session.exec(
-                select(Source).where(Source.user_id == user_id, Source.source_type == source_type)
-            ).first()
-            if source:
-                source.connection_status = "paused"
-                source.last_error = "Disconnected by user"
-                session.add(source)
-        session.add(
-            IntegrationSyncLog(
-                user_id=user_id,
-                provider="google",
-                status="info",
-                message="Google integration disconnected by user.",
-            )
-        )
+@router.post("/{provider}/disconnect")
+def disconnect_integration(provider: str, user_id: int = 1, session: Session = Depends(get_session)):
+    """
+    Disconnects a provider and removes/updates the database record.
+    """
+    provider = provider.lower()
+    statement = select(Source).where(Source.user_id == user_id, Source.source_type == provider)
+    source = session.exec(statement).first()
+    
+    if source:
+        session.delete(source)
         session.commit()
-        return {"ok": True}
-    raise HTTPException(status_code=400, detail="Supported providers: google")
-
-
-@router.get("/whatsapp/webhook")
-def whatsapp_verify(
-    hub_mode: str = Query("", alias="hub.mode"),
-    hub_verify_token: str = Query("", alias="hub.verify_token"),
-    hub_challenge: str = Query("", alias="hub.challenge"),
-):
-    if hub_mode == "subscribe" and hub_verify_token and hub_verify_token == config.WHATSAPP_VERIFY_TOKEN:
-        return int(hub_challenge)
-    raise HTTPException(status_code=403, detail="Webhook verification failed")
-
-
-@router.post("/whatsapp/webhook")
-async def whatsapp_webhook(
-    request: Request,
-    x_hub_signature_256: str = Header(default=""),
-    user_id: int = Depends(get_current_user_id),
-    session: Session = Depends(get_session),
-):
-    raw = await request.body()
-    if config.WHATSAPP_APP_SECRET and not verify_whatsapp_signature(x_hub_signature_256, raw):
-        raise HTTPException(status_code=401, detail="Invalid webhook signature")
-    payload: dict[str, Any] = json.loads(raw.decode() or "{}")
-    imported = ingest_whatsapp_payload(session, user_id, payload)
-    return {"ok": True, "imported": imported}
-
+        return {"success": True, "message": f"Disconnected {provider}"}
+        
+    return {"success": False, "message": f"{provider} was not connected"}
