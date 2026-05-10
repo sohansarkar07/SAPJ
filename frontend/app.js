@@ -1800,11 +1800,16 @@ function navigate(page) {
   // Re-add the script tag so we keep reference (not strictly needed)
   window.scrollTo(0, 0);
 
-// Attach navigation listeners
+  // Attach navigation listeners
   attachNavListeners();
   
   // Re-attach theme toggle
   attachThemeToggle();
+
+  // Call the global post-navigation hook (features.js uses this)
+  if (typeof window.onPageLoad === 'function') {
+    window.onPageLoad(page);
+  }
 }
 
 function attachThemeToggle() {
@@ -1866,29 +1871,55 @@ function attachNavListeners() {
     'smart search': 'search',
     'sources': 'sources',
     'grant writer': 'grants',
-    'volunteer schedule': 'dashboard',
-    'impact reports': 'dashboard',
-    'flashcards': 'dashboard',
+    'volunteer schedule': 'volunteer',
+    'impact reports': 'impact',
+    'flashcards': 'flashcards',
     'settings': 'settings',
     'synthesis': 'search',
+    'mentee dashboard': 'mentees',
+    'project briefs': 'projects',
   };
 
   const actionMap = {
     'get started free': 'dashboard',
+    'get started': 'dashboard',
     'start synthesizing': 'dashboard',
     'log in': 'dashboard',
+    'see grant writer in action': 'grants',
+    'explore dashboard': 'dashboard',
+    'try project sync': 'projects',
+    'see mentor briefs': 'mentees',
+    'resume writing': 'grants',
+    'open full schedule': 'volunteer',
     'features': null,
     'how it works': null,
     'who it\'s for': null,
     'pricing': null,
   };
 
+  // Handle data-nav attributes (from extra_pages.js sidebar)
+  document.querySelectorAll('[data-nav]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = el.getAttribute('data-nav');
+      if (target && PAGE_DATA[target]) {
+        navigate(target);
+      }
+    });
+  });
+
   document.querySelectorAll('a, button').forEach(el => {
+    // Skip elements already handled by data-nav
+    if (el.hasAttribute('data-nav')) return;
+    
     // Don't intercept hash links for in-page scroll on landing
     const href = el.getAttribute('href');
     if (currentPage === 'landing' && href && href.startsWith('#') && href.length > 1) {
       return; // let native scroll handle it
     }
+
+    // Skip elements with onclick handlers (they handle themselves)
+    if (el.hasAttribute('onclick')) return;
 
     el.addEventListener('click', (e) => {
       const text = el.textContent.trim().toLowerCase();
