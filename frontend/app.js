@@ -280,7 +280,7 @@ PAGE_DATA['landing'] = {
               <h3 class="text-3xl font-bold mb-4">The Magic Moment</h3>
               <p class="text-lg text-white/90 leading-relaxed italic mb-8">
                 "Upload mission statement PDF + last 3 months of work emails → Second Brain drafts a complete grant
-                application in 10 minutes. Priya submits it in 30. Gets the funding. Changes 500 lives."
+                application in 10 minutes. You submit it in 30. Get the funding. Change 500 lives."
               </p>
               <button
                 class="bg-white text-primary font-semibold py-3 px-6 rounded-lg self-start hover:bg-surface-container-lowest transition-colors shadow-sm">See
@@ -594,13 +594,13 @@ PAGE_DATA['dashboard'] = {
             </a>
 </div>
 <div class="mt-auto px-4 pt-4 border-t border-slate-200 dark:border-slate-800">
-<div class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
-<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">
-                    PS
-                </div>
+<div id="sidebar-user-card" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<div id="sidebar-user-avatar" class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm overflow-hidden">
+  <span id="sidebar-user-initials">…</span>
+</div>
 <div class="flex-1 overflow-hidden">
-<p class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">Priya Sharma</p>
-<p class="text-xs text-slate-500 truncate">NGO Pro Plan</p>
+<p id="sidebar-user-name" class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">Loading…</p>
+<p id="sidebar-user-email" class="text-xs text-slate-500 truncate"> </p>
 </div>
 <span class="material-symbols-outlined text-slate-400 text-sm">more_vert</span>
 </div>
@@ -642,7 +642,7 @@ PAGE_DATA['dashboard'] = {
 <div class="bg-primary text-on-primary rounded-xl p-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
 <div class="absolute inset-0 bg-gradient-to-r from-primary to-primary-fixed-variant opacity-50 pointer-events-none"></div>
 <div class="relative z-10">
-<h2 class="font-h2 text-h2 mb-2">🌅 Good morning, Priya.</h2>
+<h2 id="dashboard-greeting" class="font-h2 text-h2 mb-2">🌅 Good morning.</h2>
 <p class="text-primary-fixed-dim max-w-lg">Your second brain has synthesized 12 new sources while you were away. Here's what you need to know today.</p>
 </div>
 <div class="relative z-10 flex flex-col gap-3 min-w-[250px]">

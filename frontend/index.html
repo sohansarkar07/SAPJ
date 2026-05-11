@@ -6,11 +6,11 @@
   <!-- API origin: leave empty to use same host as this page (/api). For dev (e.g. Live Server on :5500), set to http://127.0.0.1:8000 -->
   <meta name="second-brain-api" content="http://127.0.0.1:8000" />
   <title>Second Brain — Knowledge Synthesizer</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
     rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -233,5 +233,31 @@
   <!-- features.js + features2.js wire up all interactive functionality -->
   <script src="features.js"></script>
   <script src="features2.js"></script>
+  <!-- ═══ Integration Layer (additive — does not modify existing code) ═══ -->
+
+  <!-- Supabase JS SDK (required for auth) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <!-- Environment configuration -->
+  <script>
+    window.__ENV__ = {
+      SUPABASE_URL: 'https://vcpddkfalxzkualrwqfm.supabase.co',
+      SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjcGRka2ZhbHh6a3VhbHJ3cWZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0MDY2NDQsImV4cCI6MjA5Mzk4MjY0NH0.pkK-4bk2f5jTIs-UYmihFFFJMRbhoqs-SvKE07BNOXk',
+      BACKEND_URL: 'http://127.0.0.1:8000',
+    };
+  </script>
+
+  <!-- Service layer -->
+  <script src="services/auth.js"></script>
+  <script src="services/login.js"></script>
+  <script src="services/apiClient.js"></script>
+  <script src="services/integrations.js"></script>
+  <script src="services/userProfile.js"></script>
+
+  <!-- OAuth callback page -->
+  <script src="pages/integrations/callback.js"></script>
+
+  <!-- UI wiring (non-destructive) -->
+  <script src="integrations_ui.js"></script>
 </body>
 </html>

@@ -22,8 +22,9 @@ CORS_ORIGINS = _split_csv(
     )
 )
 
-# Resolve the signed-in user for API calls. Set to mentor/agency demo emails to switch personas.
-DEFAULT_USER_EMAIL = os.getenv("DEFAULT_USER_EMAIL", "priya@greenhope.org")
+# Dev fallback: resolve a specific user by email when no Bearer token is present.
+# Leave empty in production — real users are resolved from the Supabase JWT.
+DEFAULT_USER_EMAIL = os.getenv("DEFAULT_USER_EMAIL", "")
 
 # Dev / reverse-proxy only: trust X-User-Id header when set to true (never enable on public internet).
 TRUST_X_USER_ID = os.getenv("TRUST_X_USER_ID", "").lower() in ("1", "true", "yes")

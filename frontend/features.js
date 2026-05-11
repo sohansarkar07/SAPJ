@@ -25,6 +25,11 @@ let sbSession = null;
 let sbSessionPromise = null;
 
 async function fetchSession() {
+  if (window.SecondBrainAPI) {
+    const { data, error } = await window.SecondBrainAPI.get('/api/session');
+    if (error) throw new Error(`Session error: ${error}`);
+    return data;
+  }
   const r = await fetch(`${API}/session`, { credentials: 'same-origin' });
   if (!r.ok) throw new Error(`Session ${r.status}`);
   return r.json();
@@ -67,6 +72,17 @@ window.toggleDarkMode = toggleDarkMode;
 
 async function api(path, opts = {}) {
   try {
+    if (window.SecondBrainAPI) {
+      // features.js paths don't include /api, so we must prepend it
+      const fullPath = path.startsWith('/api') ? path : `/api${path.startsWith('/') ? '' : '/'}${path}`;
+      const { data, error } = await window.SecondBrainAPI.request(fullPath, opts);
+      if (error) {
+        console.warn('API err:', error);
+        return null;
+      }
+      return data || true;
+    }
+
     const r = await fetch(API + path, {
       ...opts,
       credentials: 'same-origin',
@@ -115,6 +131,8 @@ window.onPageLoad = function (page) {
       mentees: loadMentees,
       projects: loadProjects,
       flashcards: loadFlashcards,
+      search: loadSearch,
+      dashboard: loadDashboard,
     };
     const fn = loaders[page];
     if (fn) await fn();
@@ -349,17 +367,9 @@ function sourceCard(title, icon, source, actions = '') {
   const status = source?.connection_status || 'paused';
   const account = source?.provider_account || source?.name || 'Not connected';
   const synced = source?.last_synced_at ? `Last sync: ${relTime(source.last_synced_at)}` : source?.last_error || 'Not synced yet';
-  const badgeCls =
-    status === 'connected'
-      ? 'bg-green-100 text-green-800'
-      : status === 'syncing'
-        ? 'bg-blue-100 text-blue-800'
-        : status === 'error'
-          ? 'bg-red-100 text-red-800'
-          : 'bg-orange-100 text-orange-800';
+  const badgeCls = status === 'connected' ? 'bg-green-100 text-green-800' : status === 'syncing' ? 'bg-blue-100 text-blue-800' : status === 'error' ? 'bg-red-100 text-red-800' : 'bg-orange-100 text-orange-800';
   const badgeTxt = status.charAt(0).toUpperCase() + status.slice(1);
-  return `
-  <div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-md flex flex-col justify-between hover:border-primary-container/50 transition-colors group min-h-[170px]">
+  return `<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-md flex flex-col justify-between hover:border-primary-container/50 transition-colors group min-h-[170px]">
     <div class="flex justify-between items-start gap-2">
       <div class="w-[40px] h-[40px] rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
         <span class="material-symbols-outlined">${icon}</span>
@@ -378,99 +388,77 @@ function sourceCard(title, icon, source, actions = '') {
 async function loadSources() {
   const wrap = document.querySelector('main div.flex-1.p-xl.overflow-y-auto');
   if (!wrap) return;
-  const status = await api('/integrations/status');
-  const sources = status?.sources || [];
-  const logs = status?.logs || [];
-  const byType = {};
-  sources.forEach((s) => {
-    byType[s.source_type] = s;
-  });
+  const documents = await api('/documents') || [];
 
-  wrap.innerHTML = `
-    <section class="mb-section">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
-        ${sourceCard(
-          'Gmail',
-          'mail',
-          byType.gmail,
-          `<div class="flex gap-2"><button onclick="connectGoogle()" class="text-[12px] px-2 py-1 rounded bg-primary text-white">Connect</button><button onclick="syncProvider('gmail')" class="text-[12px] px-2 py-1 rounded border border-outline-variant">Sync now</button></div>`
-        )}
-        ${sourceCard(
-          'Google Calendar',
-          'calendar_today',
-          byType.calendar,
-          `<div class="flex gap-2"><button onclick="connectGoogle()" class="text-[12px] px-2 py-1 rounded bg-primary text-white">Connect</button><button onclick="syncProvider('calendar')" class="text-[12px] px-2 py-1 rounded border border-outline-variant">Sync now</button></div>`
-        )}
-        ${sourceCard('Local Documents', 'picture_as_pdf', byType.pdf)}
-        ${sourceCard('WhatsApp Cloud', 'chat', byType.whatsapp, `<div class="text-[12px] text-on-surface-variant">Webhook: <code>/api/integrations/whatsapp/webhook</code></div>`)}
+  // Update Local Documents card
+  const h3s = Array.from(wrap.querySelectorAll('h3'));
+  const pdfTitle = h3s.find(h => h.textContent.trim() === 'Local Documents');
+  if (pdfTitle) {
+    const card = pdfTitle.closest('div.bg-surface-container-lowest');
+    if (card) {
+      const det = card.querySelector('div:last-child');
+      const pdfCount = documents.filter(d => d.doc_type === 'pdf').length;
+      if (det) det.innerHTML = `<h3 class="font-h3 text-[16px] font-semibold text-on-surface">Local Documents</h3><p class="text-[12px] text-on-surface-variant mt-1">${pdfCount} document${pdfCount !== 1 ? 's' : ''} uploaded</p><p class="text-[12px] text-outline mt-xs truncate">${pdfCount ? 'AI-processed & searchable' : 'Upload PDFs to get started'}</p>`;
+      const badge = card.querySelector('span[class*="rounded-full"]');
+      if (badge && pdfCount > 0) { badge.className = 'bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1'; badge.innerHTML = '<span class="w-[6px] h-[6px] rounded-full bg-green-500 block"></span>Connected'; }
+    }
+  }
+
+  // Remove old dynamic sections
+  document.getElementById('pdf-upload-section')?.remove();
+  document.getElementById('documents-section')?.remove();
+
+  // Upload Zone
+  const upSec = document.createElement('section');
+  upSec.id = 'pdf-upload-section';
+  upSec.className = 'mb-section';
+  upSec.innerHTML = `<h3 class="font-h3 text-h3 text-on-surface mb-md flex items-center gap-2"><span class="material-symbols-outlined text-primary">upload_file</span> Upload Documents</h3>
+    <div id="pdf-dropzone" class="bg-surface-container-lowest border-2 border-dashed border-outline-variant/60 rounded-xl p-8 text-center hover:border-primary/50 transition-all cursor-pointer group relative">
+      <input type="file" id="pdf-file-input" accept=".pdf" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"/>
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors"><span class="material-symbols-outlined text-primary text-3xl">cloud_upload</span></div>
+        <div><p class="font-semibold text-on-surface text-base">Drop PDF files here or click to browse</p><p class="text-sm text-on-surface-variant mt-1">AI will automatically summarize and extract key information</p></div>
       </div>
-      <div class="mt-3 flex gap-2">
-        <button onclick="syncProvider('google')" class="text-sm px-3 py-2 rounded bg-primary text-white">Sync Gmail + Calendar</button>
-        <button onclick="disconnectGoogle()" class="text-sm px-3 py-2 rounded border border-outline-variant">Disconnect Google</button>
+    </div>
+    <div id="upload-progress" class="hidden mt-4 bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-4">
+      <div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary animate-spin">progress_activity</span>
+        <div class="flex-1"><p id="upload-filename" class="text-sm font-medium text-on-surface">Uploading...</p><div class="w-full bg-surface-variant rounded-full h-2 mt-2"><div id="upload-bar" class="bg-primary h-2 rounded-full transition-all duration-300" style="width:0%"></div></div></div>
+        <span id="upload-pct" class="text-xs text-outline font-mono">0%</span>
       </div>
-    </section>
-    <section class="mb-section">
-      <h3 class="font-h3 text-h3 text-on-surface mb-md">Available Integrations</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
-        <div class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm h-[100px] flex items-center justify-center text-[12px]">Notion (next phase)</div>
-        <div class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm h-[100px] flex items-center justify-center text-[12px]">WhatsApp Cloud (active)</div>
-        <div class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm h-[100px] flex items-center justify-center text-[12px]">Calendar (active)</div>
-        <div class="bg-surface border-2 border-dashed border-outline-variant/50 rounded-DEFAULT p-sm h-[100px] flex items-center justify-center text-[12px]">Gmail (active)</div>
-      </div>
-    </section>
-    <section class="mb-section max-w-3xl">
-      <h3 class="font-h3 text-h3 text-on-surface mb-md">Sync Activity</h3>
-      <div class="bg-surface-container-lowest border border-outline-variant/50 rounded-DEFAULT p-lg">
-        <div class="space-y-3">
-          ${
-            logs.length
-              ? logs
-                  .map(
-                    (l) => `<div class="flex justify-between gap-3 text-sm">
-                <div class="${l.status === 'error' ? 'text-red-600' : 'text-on-surface'}">${escHtml(l.message)}</div>
-                <div class="text-outline text-xs shrink-0">${escHtml(relTime(l.created_at))}</div>
-              </div>`
-                  )
-                  .join('')
-              : '<p class="text-sm text-on-surface-variant">No sync logs yet.</p>'
-          }
-        </div>
-      </div>
-    </section>
-  `;
+    </div>`;
+
+  // Documents List
+  const docSec = document.createElement('section');
+  docSec.id = 'documents-section';
+  docSec.className = 'mb-section';
+  docSec.innerHTML = `<div class="flex justify-between items-center mb-md"><h3 class="font-h3 text-h3 text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">description</span> Your Documents <span class="text-sm font-normal text-on-surface-variant">(${documents.length})</span></h3></div>
+    <div class="grid grid-cols-1 gap-3" id="documents-grid">${documents.length ? documents.map(d => _docCard(d)).join('') : '<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-8 text-center"><span class="material-symbols-outlined text-outline text-4xl mb-3 block">folder_open</span><p class="text-on-surface-variant">No documents yet. Upload a PDF above to get started.</p></div>'}</div>`;
+
+  const firstSec = wrap.querySelector('section');
+  if (firstSec && firstSec.nextSibling) { wrap.insertBefore(upSec, firstSec.nextSibling); wrap.insertBefore(docSec, upSec.nextSibling); }
+  else { wrap.appendChild(upSec); wrap.appendChild(docSec); }
+
+  // Wire file input
+  const fi = document.getElementById('pdf-file-input');
+  if (fi) fi.addEventListener('change', async (e) => { for (const f of Array.from(e.target.files)) await _uploadPdf(f); fi.value = ''; });
+
+  // Wire drag-drop
+  const dz = document.getElementById('pdf-dropzone');
+  if (dz) {
+    dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('border-primary', 'bg-primary/5'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('border-primary', 'bg-primary/5'));
+    dz.addEventListener('drop', async (e) => { e.preventDefault(); dz.classList.remove('border-primary', 'bg-primary/5'); const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf'); if (!files.length) { toast('Please drop PDF files only'); return; } for (const f of files) await _uploadPdf(f); });
+  }
 }
 
-window.connectGoogle = async function () {
-  const data = await api('/integrations/google/connect');
-  if (!data?.auth_url) {
-    toast('Google OAuth is not configured');
-    return;
+function _docCard(d) {
+  let ai = []; try { ai = JSON.parse(d.action_items_json || '[]'); } catch(e) {}
+  return `<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-4 flex gap-4 shadow-sm hover:border-primary/50 transition-colors group">
+    <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500 shrink-0 mt-1"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">picture_as_pdf</span></div>
+    <div class="flex-1 min-w-0">
+          <p>${formattedHtml}</p>
+        </div>
+      </div>
+    `;
   }
-  window.location.href = data.auth_url;
-};
-
-window.syncProvider = async function (provider) {
-  const res = await api('/integrations/sync-now', {
-    method: 'POST',
-    body: JSON.stringify({ provider }),
-  });
-  if (res) {
-    toast(`${provider} sync completed`);
-    loadSources();
-  } else {
-    toast(`${provider} sync failed`);
-  }
-};
-
-window.disconnectGoogle = async function () {
-  const res = await api('/integrations/disconnect', {
-    method: 'POST',
-    body: JSON.stringify({ provider: 'google' }),
-  });
-  if (res) {
-    toast('Google disconnected');
-    loadSources();
-  } else {
-    toast('Disconnect failed');
-  }
-};
+}
